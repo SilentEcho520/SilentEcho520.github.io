@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWZ-视频解析器</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .video-container {
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay p {
+            font-size: 20px;
+            color: #fff;
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .video-container iframe {
+                height: 200px;
+            }
+
+            .modal-content p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WWZ-视频解析器</h1>
+        <input type="text" id="videoUrlInput" placeholder="输入视频URL">
+        <select id="parserSelect">
+            <option value="https://www.8090g.cn/jiexi/?url=">-8090g-</option>
+            <option value="https://jx.777jiexi.com/player/?url=">-777-</option>
+            <option value="https://yparse.ik9.cc/index.php?url=">-ik9-</option>
+            <option value="https://jx.jsonplayer.com/player/?url=">-杰森-</option>
+            <option value="https://jx.yangtu.top/?url=">-阳途-</option>
+            <option value="https://bd.jx.cn/?url=">-冰豆-</option>
+            <option value="https://jx.m3u8.tv/jiexi/?url=">-m3u8TV-</option>
+            <option value="https://jx.dj6u.com/?url=">-听乐-</option>
+            <option value="https://jx.xmflv.com/?url=">-虾米-</option>
+            <option value="https://jx.xmflv.cc/?url=">-虾米2-</option>
+            <option value="https://jx.yparse.com/index.php?url=">-云析-</option>
+            <option value="https://player.mrgaocloud.com/player/?url=">-红狐-</option>
+        </select>
+        <button id="parseBtn">解析视频</button>
+        <div class="video-container" id="videoPlayerContainer"></div>
+    </div>
+    <div class="modal" id="warningModal">
+        <div class="modal-content">
+            <p>本站一切资源皆来源于网络收集，本站任何资源均与本人无关，切勿用于违法用途，本站不负任何法律责任</p>
+            <p>部分接口可能不能使用，建议使用8090g接口</p>
+            <button id="closeModalBtn">关闭</button>
+        </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <p>视频正在解析嗷~稍等嗷</p>
+    </div>
+    <script>
+        const warningModal = document.getElementById('warningModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        closeModalBtn.addEventListener('click', function() {
+            warningModal.style.display = 'none';
+        });
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        document.getElementById('parseBtn').addEventListener('click', function() {
+            const videoUrl = document.getElementById('videoUrlInput').value;
+            const parserUrl = document.getElementById('parserSelect').value;
+            const fullUrl = parserUrl + encodeURIComponent(videoUrl);
+            if (videoUrl) {
+                loadingOverlay.style.display = 'flex';
+                const videoPlayer = document.createElement('iframe');
+                videoPlayer.src = fullUrl;
+                videoPlayer.allowFullscreen = true;
+                const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+                videoPlayerContainer.innerHTML = ''; 
+                videoPlayerContainer.appendChild(videoPlayer);
+                videoPlayer.onload = function() {
+                    loadingOverlay.style.display = 'none';
+                };
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,203 +1,306 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WWZ-视频解析器</title>
+    <title>WUWANGZE-Music</title>
+    <link rel="icon" type="image/png" href="https://tse3.mm.bing.net/th/id/OIG1.eXlgdRakg4U9cEfyydgb?pid=ImgGn">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
         }
-
         .container {
-            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .container h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
+        .product {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+            margin: 15px;
             padding: 15px;
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: #fff;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+        .product h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #007BFF;
+        }
+        .product button {
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s, transform 0.3s;
         }
-
-        button:hover {
-            background-color: #45a049;
+        .product button:hover {
+            background-color: #0056B3;
+            transform: translateY(-2px);
         }
-
-        .video-container {
-            margin-top: 20px;
-        }
-
-        .video-container iframe {
+        .search-bar {
             width: 100%;
-            height: 300px;
-            border-radius: 10px;
-            border: none;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 10px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            z-index: 1000;
         }
-
-        .modal-content {
-            background-color: #444;
-            padding: 20px;
+        .search-bar input {
+            width: 60%;
+            padding: 12px 15px;
             border-radius: 10px;
-            text-align: center;
-        }
-
-        .modal-content p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .modal-content button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #ccc;
             font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .search-bar input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            margin-left: 10px;
+            transition: background-color 0.3s;
         }
-
-        .modal-content button:hover {
-            background-color: #45a049;
+        .search-bar button:hover {
+            background-color: #0056B3;
         }
-
-        .loading-overlay {
+        .search-bar .reset-button {
+            padding: 12px 20px;
+            background-color: #FF4757;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+        .search-bar .reset-button:hover {
+            background-color: #D63447;
+        }
+        .audio-player {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
             align-items: center;
-            z-index: 1000;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
         }
-
-        .loading-overlay p {
-            font-size: 20px;
-            color: #fff;
-            animation: blinker 1s linear infinite;
-        }
-
-        @keyframes blinker {
-            50% { opacity: 0.5; }
-        }
-
-        @media (max-width: 768px) {
-            .video-container iframe {
-                height: 200px;
-            }
-
-            .modal-content p {
-                font-size: 16px;
-            }
+        .audio-player button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>WWZ-视频解析器</h1>
-        <input type="text" id="videoUrlInput" placeholder="输入视频URL">
-        <select id="parserSelect">
-            <option value="https://www.8090g.cn/jiexi/?url=">-8090g-</option>
-            <option value="https://jx.777jiexi.com/player/?url=">-777-</option>
-            <option value="https://yparse.ik9.cc/index.php?url=">-ik9-</option>
-            <option value="https://jx.jsonplayer.com/player/?url=">-杰森-</option>
-            <option value="https://jx.yangtu.top/?url=">-阳途-</option>
-            <option value="https://bd.jx.cn/?url=">-冰豆-</option>
-            <option value="https://jx.m3u8.tv/jiexi/?url=">-m3u8TV-</option>
-            <option value="https://jx.dj6u.com/?url=">-听乐-</option>
-            <option value="https://jx.xmflv.com/?url=">-虾米-</option>
-            <option value="https://jx.xmflv.cc/?url=">-虾米2-</option>
-            <option value="https://jx.yparse.com/index.php?url=">-云析-</option>
-            <option value="https://player.mrgaocloud.com/player/?url=">-红狐-</option>
-        </select>
-        <button id="parseBtn">解析视频</button>
-        <div class="video-container" id="videoPlayerContainer"></div>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="搜索歌曲名...">
+        <button onclick="searchSongs()">搜索</button>
+        <button class="reset-button" onclick="resetSearch()">返回</button>
     </div>
-    <div class="modal" id="warningModal">
-        <div class="modal-content">
-            <p>本站一切资源皆来源于网络收集，本站任何资源均与本人无关，切勿用于违法用途，本站不负任何法律责任</p>
-            <p>部分接口可能不能使用，建议使用8090g接口</p>
-            <button id="closeModalBtn">关闭</button>
+
+    <div class="container" id="product-container">
+        <div class="product">
+            <h2>安河桥</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%AE%89%E6%B2%B3%E6%A1%A5.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>白山茶</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%99%BD%E5%B1%B1%E8%8C%B6.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>春庭雪</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%98%A5%E5%BA%AD%E9%9B%AA.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>辞九门回忆</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%BE%9E%E4%B9%9D%E9%97%A8%E5%9B%9E%E5%BF%86.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>此去半生DJ</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%AD%A4%E5%8E%BB%E5%8D%8A%E7%94%9FDJ.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>姑娘别哭泣</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A7%91%E5%A8%98%E5%88%AB%E5%93%AD%E6%B3%A3.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>句号</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%8F%A5%E5%8F%B7.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>兰亭集序</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%85%B0%E4%BA%AD%E5%BA%8F.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>离别开出花</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%A6%BB%E5%88%AB%E5%BC%80%E5%87%BA%E8%8A%B1.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>妈妈的话</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A6%88%E5%A6%88%E7%9A%84%E8%AF%9D.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>那年年少</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E9%82%A3%E5%B9%B4%E5%B9%B4%E5%B0%91.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>年轮</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%B9%B4%E8%BD%AE.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>泡沫</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%B3%A1%E6%B2%AB.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>其实都没有</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%85%B6%E5%AE%9E%E9%83%BD%E6%B2%A1%E6%9C%89.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>起风了</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>若是月亮还没来</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%8B%A5%E6%98%AF%E6%9C%88%E4%BA%AE%E8%BF%98%E6%B2%A1%E6%9D%A5.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>山茶花读不懂白玫瑰</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%B1%B1%E8%8C%B6%E8%8A%B1%E8%AF%BB%E4%B8%8D%E6%87%82%E7%99%BD%E7%8E%AB%E7%91%B0.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>奢香夫人</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A5%A2%E9%A6%99%E5%A4%AB%E4%BA%BA.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>踏山河</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%B8%8F%E5%B1%B1%E6%B2%B3.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>桃花诺</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%A1%83%E8%8A%B1%E8%AF%BA.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>体面</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E4%BD%93%E9%9D%A2.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>童话镇</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%AB%A5%E8%AF%9D%E9%95%87.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>外婆的澎湖湾</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A4%96%E5%A9%86%E7%9A%84%E6%BE%8E%E6%B9%96%E6%B9%BE.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>我的纸飞机</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E7%9A%84%E7%BA%B8%E9%A3%9E%E6%9C%BA.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>我看过</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E7%9C%8B%E8%BF%87.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>我走后</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E8%B5%B0%E5%90%8E.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>武家坡2021</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%AD%A6%E5%AE%B6%E5%9D%A12021.mp3')">聆听</button>
+        </div>
+        <div class="product">
+            <h2>咱们结婚吧</h2>
+            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%92%B1%E4%BB%AC%E7%BB%93%E5%A9%9A%E5%90%A7.mp3')">聆听</button>
         </div>
     </div>
-    <div class="loading-overlay" id="loadingOverlay">
-        <p>视频正在解析嗷~稍等嗷</p>
-    </div>
     <script>
-        const warningModal = document.getElementById('warningModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        closeModalBtn.addEventListener('click', function() {
-            warningModal.style.display = 'none';
-        });
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        document.getElementById('parseBtn').addEventListener('click', function() {
-            const videoUrl = document.getElementById('videoUrlInput').value;
-            const parserUrl = document.getElementById('parserSelect').value;
-            const fullUrl = parserUrl + encodeURIComponent(videoUrl);
-            if (videoUrl) {
-                loadingOverlay.style.display = 'flex';
-                const videoPlayer = document.createElement('iframe');
-                videoPlayer.src = fullUrl;
-                videoPlayer.allowFullscreen = true;
-                const videoPlayerContainer = document.getElementById('videoPlayerContainer');
-                videoPlayerContainer.innerHTML = ''; 
-                videoPlayerContainer.appendChild(videoPlayer);
-                videoPlayer.onload = function() {
-                    loadingOverlay.style.display = 'none';
-                };
+        function playAudio(url) {
+            let existingPlayer = document.getElementById('audio-player');
+            if (existingPlayer) {
+                existingPlayer.remove();
             }
-        });
+            let audioPlayer = document.createElement('div');
+            audioPlayer.className = 'audio-player';
+            audioPlayer.id = 'audio-player';
+            let audio = document.createElement('audio');
+            audio.src = url;
+            audio.controls = true;
+            audio.style.width = '80%';
+            let closeButton = document.createElement('button');
+            closeButton.innerHTML = '关闭';
+            closeButton.onclick = function () {
+                audioPlayer.remove();
+            };
+            audioPlayer.appendChild(audio);
+            audioPlayer.appendChild(closeButton);
+            document.body.appendChild(audioPlayer);
+            audio.play();
+        }
+        function searchSongs() {
+            let input = document.getElementById('search-input').value.toLowerCase();
+            let products = document.querySelectorAll('.product');          
+            products.forEach(product => {
+                let songName = product.querySelector('h2').textContent.toLowerCase();
+                if (songName.includes(input)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        function resetSearch() {
+            document.getElementById('search-input').value = '';
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                product.style.display = 'block';
+            });
+        }
     </script>
 </body>
 </html>

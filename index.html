@@ -1,306 +1,309 @@
 
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WUWANGZE-Music</title>
-    <link rel="icon" type="image/png" href="https://tse3.mm.bing.net/th/id/OIG1.eXlgdRakg4U9cEfyydgb?pid=ImgGn">
+    <title>WUWANGZE 2048 GAME</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        .container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .product {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            width: 45%;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebcd;
+            overflow: hidden;
         }
-        .product:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .product img {
-            width: 100%;
-            height: auto;
-            max-height: 300px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 10px;
-        }
-        .product h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #007BFF;
-        }
-        .product button {
-            background-color: #007BFF;
-            color: white;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .product button:hover {
-            background-color: #0056B3;
-            transform: translateY(-2px);
-        }
-        .search-bar {
-            width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
+        .game-container {
+            position: relative;
+            width: 90vmin;
+            height: 90vmin;
+            background-color: #ffcc99;
+            border-radius: 20px;
             padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .tile {
+            position: absolute;
+            width: 20vmin;
+            height: 20vmin;
+            background-color: #fff8dc;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
-        }
-        .search-bar input {
-            width: 60%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        .search-bar input:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
-        .search-bar button {
-            padding: 12px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.3s;
-        }
-        .search-bar button:hover {
-            background-color: #0056B3;
-        }
-        .search-bar .reset-button {
-            padding: 12px 20px;
-            background-color: #FF4757;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.3s;
-        }
-        .search-bar .reset-button:hover {
-            background-color: #D63447;
-        }
-        .audio-player {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background-color: #007BFF;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1001;
+            font-size: 6vmin;
+            font-weight: bold;
+            color: #776e65;
+            transition: transform 0.2s;
         }
-        .audio-player button {
-            background: none;
+        .tile[data-value="2"] { background-color: #ffebcd; }
+        .tile[data-value="4"] { background-color: #ffdead; }
+        .tile[data-value="8"] { background-color: #ffb6c1; color: #f9f6f2; }
+        .tile[data-value="16"] { background-color: #ff69b4; color: #f9f6f2; }
+        .tile[data-value="32"] { background-color: #ff1493; color: #f9f6f2; }
+        .tile[data-value="64"] { background-color: #db7093; color: #f9f6f2; }
+        .tile[data-value="128"] { background-color: #ff6347; color: #f9f6f2; }
+        .tile[data-value="256"] { background-color: #ff4500; color: #f9f6f2; }
+        .tile[data-value="512"] { background-color: #ff8c00; color: #f9f6f2; }
+        .tile[data-value="1024"] { background-color: #ffd700; color: #f9f6f2; }
+        .tile[data-value="2048"] { background-color: #ffff00; color: #f9f6f2; }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            display: none;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
             border: none;
-            color: white;
+            background-color: #ffcc99;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
+        }
+        .controls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            width: 90vmin;
+        }
+        .controls button {
+            padding: 10px;
+            border: none;
+            background-color: #ffcc99;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .max-tile {
+            font-size: 1.5em;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="search-bar">
-        <input type="text" id="search-input" placeholder="搜索歌曲名...">
-        <button onclick="searchSongs()">搜索</button>
-        <button class="reset-button" onclick="resetSearch()">返回</button>
+    <div class="game-container" id="game-container"></div>
+    <div class="controls">
+        <button onclick="restartGame()">重置</button>
+        <div class="max-tile" id="max-tile">最大数字: 0</div>
+        <button onclick="downloadGame()">离线玩</button>
     </div>
-
-    <div class="container" id="product-container">
-        <div class="product">
-            <h2>安河桥</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%AE%89%E6%B2%B3%E6%A1%A5.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>白山茶</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%99%BD%E5%B1%B1%E8%8C%B6.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>春庭雪</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%98%A5%E5%BA%AD%E9%9B%AA.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>辞九门回忆</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%BE%9E%E4%B9%9D%E9%97%A8%E5%9B%9E%E5%BF%86.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>此去半生DJ</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%AD%A4%E5%8E%BB%E5%8D%8A%E7%94%9FDJ.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>姑娘别哭泣</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A7%91%E5%A8%98%E5%88%AB%E5%93%AD%E6%B3%A3.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>句号</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%8F%A5%E5%8F%B7.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>兰亭集序</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%85%B0%E4%BA%AD%E5%BA%8F.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>离别开出花</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%A6%BB%E5%88%AB%E5%BC%80%E5%87%BA%E8%8A%B1.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>妈妈的话</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A6%88%E5%A6%88%E7%9A%84%E8%AF%9D.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>那年年少</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E9%82%A3%E5%B9%B4%E5%B9%B4%E5%B0%91.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>年轮</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%B9%B4%E8%BD%AE.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>泡沫</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%B3%A1%E6%B2%AB.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>其实都没有</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%85%B6%E5%AE%9E%E9%83%BD%E6%B2%A1%E6%9C%89.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>起风了</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%B5%B7%E9%A3%8E%E4%BA%86.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>若是月亮还没来</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%8B%A5%E6%98%AF%E6%9C%88%E4%BA%AE%E8%BF%98%E6%B2%A1%E6%9D%A5.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>山茶花读不懂白玫瑰</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%B1%B1%E8%8C%B6%E8%8A%B1%E8%AF%BB%E4%B8%8D%E6%87%82%E7%99%BD%E7%8E%AB%E7%91%B0.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>奢香夫人</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A5%A2%E9%A6%99%E5%A4%AB%E4%BA%BA.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>踏山河</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E8%B8%8F%E5%B1%B1%E6%B2%B3.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>桃花诺</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%A1%83%E8%8A%B1%E8%AF%BA.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>体面</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E4%BD%93%E9%9D%A2.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>童话镇</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E7%AB%A5%E8%AF%9D%E9%95%87.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>外婆的澎湖湾</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%A4%96%E5%A9%86%E7%9A%84%E6%BE%8E%E6%B9%96%E6%B9%BE.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>我的纸飞机</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E7%9A%84%E7%BA%B8%E9%A3%9E%E6%9C%BA.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>我看过</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E7%9C%8B%E8%BF%87.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>我走后</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%88%91%E8%B5%B0%E5%90%8E.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>武家坡2021</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E6%AD%A6%E5%AE%B6%E5%9D%A12021.mp3')">聆听</button>
-        </div>
-        <div class="product">
-            <h2>咱们结婚吧</h2>
-            <button onclick="playAudio('https://raw.githubusercontent.com/saikesw/toubaoAI/main/%E5%92%B1%E4%BB%AC%E7%BB%93%E5%A9%9A%E5%90%A7.mp3')">聆听</button>
-        </div>
+    <div class="popup" id="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">确定</button>
     </div>
     <script>
-        function playAudio(url) {
-            let existingPlayer = document.getElementById('audio-player');
-            if (existingPlayer) {
-                existingPlayer.remove();
-            }
-            let audioPlayer = document.createElement('div');
-            audioPlayer.className = 'audio-player';
-            audioPlayer.id = 'audio-player';
-            let audio = document.createElement('audio');
-            audio.src = url;
-            audio.controls = true;
-            audio.style.width = '80%';
-            let closeButton = document.createElement('button');
-            closeButton.innerHTML = '关闭';
-            closeButton.onclick = function () {
-                audioPlayer.remove();
-            };
-            audioPlayer.appendChild(audio);
-            audioPlayer.appendChild(closeButton);
-            document.body.appendChild(audioPlayer);
-            audio.play();
+        const gameContainer = document.getElementById('game-container');
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popup-message');
+        const maxTileDisplay = document.getElementById('max-tile');
+        const size = 4;
+        let board = Array(size).fill().map(() => Array(size).fill(0));
+        let maxTile = 0;
+
+        function createTile(value, x, y) {
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            tile.dataset.value = value;
+            tile.style.transform = `translate(${x * 22.5}vmin, ${y * 22.5}vmin)`;
+            tile.textContent = value;
+            gameContainer.appendChild(tile);
         }
-        function searchSongs() {
-            let input = document.getElementById('search-input').value.toLowerCase();
-            let products = document.querySelectorAll('.product');          
-            products.forEach(product => {
-                let songName = product.querySelector('h2').textContent.toLowerCase();
-                if (songName.includes(input)) {
-                    product.style.display = 'block';
+
+        function updateBoard() {
+            gameContainer.innerHTML = '';
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (board[y][x] !== 0) {
+                        createTile(board[y][x], x, y);
+                    }
+                }
+            }
+            maxTileDisplay.textContent = `最大数字: ${maxTile}`;
+        }
+
+        function addRandomTile() {
+            let emptyTiles = [];
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    if (board[y][x] === 0) {
+                        emptyTiles.push({ x, y });
+                    }
+                }
+            }
+            if (emptyTiles.length > 0) {
+                const { x, y } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+                const value = Math.random() < 0.9 ? 2 : 4;
+                board[y][x] = value;
+                updateBoard();
+            } else {
+                showPopup(`游戏结束，最大数字为 ${maxTile}`);
+            }
+        }
+
+        function slide(row) {
+            let arr = row.filter(val => val);
+            let missing = size - arr.length;
+            let zeros = Array(missing).fill(0);
+            arr = zeros.concat(arr);
+            return arr;
+        }
+
+        function combine(row) {
+            for (let i = size - 1; i >= 1; i--) {
+                if (row[i] === row[i - 1]) {
+                    row[i] *= 2;
+                    row[i - 1] = 0;
+                    if (row[i] > maxTile) {
+                        maxTile = row[i];
+                    }
+                }
+            }
+            return row;
+        }
+
+        function move(direction) {
+            let moved = false;
+            for (let i = 0; i < size; i++) {
+                let row;
+                if (direction === 'right' || direction === 'left') {
+                    row = board[i];
+                    if (direction === 'left') row.reverse();
                 } else {
-                    product.style.display = 'none';
+                    row = board.map(r => r[i]);
+                    if (direction === 'up') row.reverse();
+                }
+
+                const originalRow = [...row];
+                row = slide(row);
+                row = combine(row);
+                row = slide(row);
+
+                if (direction === 'left') row.reverse();
+                if (direction === 'up') row.reverse();
+
+                if (direction === 'right' || direction === 'left') {
+                    board[i] = row;
+                } else {
+                    for (let j = 0; j < size; j++) {
+                        board[j][i] = row[j];
+                    }
+                }
+
+                if (JSON.stringify(originalRow) !== JSON.stringify(row)) {
+                    moved = true;
+                }
+            }
+            if (moved) {
+                addRandomTile();
+            }
+        }
+
+        function setupInput() {
+            let startX, startY;
+            gameContainer.addEventListener('mousedown', (e) => {
+                startX = e.clientX;
+                startY = e.clientY;
+            });
+
+            gameContainer.addEventListener('mouseup', (e) => {
+                const endX = e.clientX;
+                const endY = e.clientY;
+                const dx = endX - startX;
+                const dy = endY - startY;
+
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    if (dx > 0) {
+                        move('right');
+                    } else {
+                        move('left');
+                    }
+                } else {
+                    if (dy > 0) {
+                        move('down');
+                    } else {
+                        move('up');
+                    }
                 }
             });
-        }
-        function resetSearch() {
-            document.getElementById('search-input').value = '';
-            let products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                product.style.display = 'block';
+
+            gameContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
             });
+
+            gameContainer.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const dx = endX - startX;
+                const dy = endY - startY;
+
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    if (dx > 0) {
+                        move('right');
+                    } else {
+                        move('left');
+                    }
+                } else {
+                    if (dy > 0) {
+                        move('down');
+                    } else {
+                        move('up');
+                    }
+                }
+            });
+
+            // Prevent scrolling on touch devices
+            gameContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
         }
+
+        function showPopup(message) {
+            popupMessage.textContent = message;
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            restartGame();
+        }
+
+        function restartGame() {
+            board = Array(size).fill().map(() => Array(size).fill(0));
+            maxTile = 0;
+            updateBoard();
+            addRandomTile();
+            addRandomTile();
+        }
+
+        function downloadGame() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '2048_game.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function initGame() {
+            addRandomTile();
+            addRandomTile();
+            setupInput();
+        }
+
+        initGame();
     </script>
 </body>
 </html>

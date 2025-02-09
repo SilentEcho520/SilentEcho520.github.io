@@ -1,309 +1,113 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WUWANGZE 2048 GAME</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffebcd;
-            overflow: hidden;
-        }
-        .game-container {
-            position: relative;
-            width: 90vmin;
-            height: 90vmin;
-            background-color: #ffcc99;
-            border-radius: 20px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        .tile {
-            position: absolute;
-            width: 20vmin;
-            height: 20vmin;
-            background-color: #fff8dc;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 6vmin;
-            font-weight: bold;
-            color: #776e65;
-            transition: transform 0.2s;
-        }
-        .tile[data-value="2"] { background-color: #ffebcd; }
-        .tile[data-value="4"] { background-color: #ffdead; }
-        .tile[data-value="8"] { background-color: #ffb6c1; color: #f9f6f2; }
-        .tile[data-value="16"] { background-color: #ff69b4; color: #f9f6f2; }
-        .tile[data-value="32"] { background-color: #ff1493; color: #f9f6f2; }
-        .tile[data-value="64"] { background-color: #db7093; color: #f9f6f2; }
-        .tile[data-value="128"] { background-color: #ff6347; color: #f9f6f2; }
-        .tile[data-value="256"] { background-color: #ff4500; color: #f9f6f2; }
-        .tile[data-value="512"] { background-color: #ff8c00; color: #f9f6f2; }
-        .tile[data-value="1024"] { background-color: #ffd700; color: #f9f6f2; }
-        .tile[data-value="2048"] { background-color: #ffff00; color: #f9f6f2; }
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            display: none;
-        }
-        .popup button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            border: none;
-            background-color: #ffcc99;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .controls {
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            width: 90vmin;
-        }
-        .controls button {
-            padding: 10px;
-            border: none;
-            background-color: #ffcc99;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .max-tile {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>天庭工作平台 - 现代化界面</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{background:linear-gradient(135deg,#667eea,#764ba2);} 
+.navbar{background-color:rgba(255,255,255,0.95);} 
+.modal{display:none;position:fixed;z-index:50;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4);} 
+.modal-content{background-color:#fefefe;margin:10% auto;padding:20px;border:1px solid #888;width:90%;max-width:600px;border-radius:0.5rem;} 
+.close{color:#aaa;float:right;font-size:28px;font-weight:bold;} 
+.close:hover,.close:focus{color:black;text-decoration:none;cursor:pointer;}
+</style>
 </head>
-<body>
-    <div class="game-container" id="game-container"></div>
-    <div class="controls">
-        <button onclick="restartGame()">重置</button>
-        <div class="max-tile" id="max-tile">最大数字: 0</div>
-        <button onclick="downloadGame()">离线玩</button>
-    </div>
-    <div class="popup" id="popup">
-        <p id="popup-message"></p>
-        <button onclick="closePopup()">确定</button>
-    </div>
-    <script>
-        const gameContainer = document.getElementById('game-container');
-        const popup = document.getElementById('popup');
-        const popupMessage = document.getElementById('popup-message');
-        const maxTileDisplay = document.getElementById('max-tile');
-        const size = 4;
-        let board = Array(size).fill().map(() => Array(size).fill(0));
-        let maxTile = 0;
-
-        function createTile(value, x, y) {
-            const tile = document.createElement('div');
-            tile.classList.add('tile');
-            tile.dataset.value = value;
-            tile.style.transform = `translate(${x * 22.5}vmin, ${y * 22.5}vmin)`;
-            tile.textContent = value;
-            gameContainer.appendChild(tile);
-        }
-
-        function updateBoard() {
-            gameContainer.innerHTML = '';
-            for (let y = 0; y < size; y++) {
-                for (let x = 0; x < size; x++) {
-                    if (board[y][x] !== 0) {
-                        createTile(board[y][x], x, y);
-                    }
-                }
-            }
-            maxTileDisplay.textContent = `最大数字: ${maxTile}`;
-        }
-
-        function addRandomTile() {
-            let emptyTiles = [];
-            for (let y = 0; y < size; y++) {
-                for (let x = 0; x < size; x++) {
-                    if (board[y][x] === 0) {
-                        emptyTiles.push({ x, y });
-                    }
-                }
-            }
-            if (emptyTiles.length > 0) {
-                const { x, y } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
-                const value = Math.random() < 0.9 ? 2 : 4;
-                board[y][x] = value;
-                updateBoard();
-            } else {
-                showPopup(`游戏结束，最大数字为 ${maxTile}`);
-            }
-        }
-
-        function slide(row) {
-            let arr = row.filter(val => val);
-            let missing = size - arr.length;
-            let zeros = Array(missing).fill(0);
-            arr = zeros.concat(arr);
-            return arr;
-        }
-
-        function combine(row) {
-            for (let i = size - 1; i >= 1; i--) {
-                if (row[i] === row[i - 1]) {
-                    row[i] *= 2;
-                    row[i - 1] = 0;
-                    if (row[i] > maxTile) {
-                        maxTile = row[i];
-                    }
-                }
-            }
-            return row;
-        }
-
-        function move(direction) {
-            let moved = false;
-            for (let i = 0; i < size; i++) {
-                let row;
-                if (direction === 'right' || direction === 'left') {
-                    row = board[i];
-                    if (direction === 'left') row.reverse();
-                } else {
-                    row = board.map(r => r[i]);
-                    if (direction === 'up') row.reverse();
-                }
-
-                const originalRow = [...row];
-                row = slide(row);
-                row = combine(row);
-                row = slide(row);
-
-                if (direction === 'left') row.reverse();
-                if (direction === 'up') row.reverse();
-
-                if (direction === 'right' || direction === 'left') {
-                    board[i] = row;
-                } else {
-                    for (let j = 0; j < size; j++) {
-                        board[j][i] = row[j];
-                    }
-                }
-
-                if (JSON.stringify(originalRow) !== JSON.stringify(row)) {
-                    moved = true;
-                }
-            }
-            if (moved) {
-                addRandomTile();
-            }
-        }
-
-        function setupInput() {
-            let startX, startY;
-            gameContainer.addEventListener('mousedown', (e) => {
-                startX = e.clientX;
-                startY = e.clientY;
-            });
-
-            gameContainer.addEventListener('mouseup', (e) => {
-                const endX = e.clientX;
-                const endY = e.clientY;
-                const dx = endX - startX;
-                const dy = endY - startY;
-
-                if (Math.abs(dx) > Math.abs(dy)) {
-                    if (dx > 0) {
-                        move('right');
-                    } else {
-                        move('left');
-                    }
-                } else {
-                    if (dy > 0) {
-                        move('down');
-                    } else {
-                        move('up');
-                    }
-                }
-            });
-
-            gameContainer.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            });
-
-            gameContainer.addEventListener('touchend', (e) => {
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                const dx = endX - startX;
-                const dy = endY - startY;
-
-                if (Math.abs(dx) > Math.abs(dy)) {
-                    if (dx > 0) {
-                        move('right');
-                    } else {
-                        move('left');
-                    }
-                } else {
-                    if (dy > 0) {
-                        move('down');
-                    } else {
-                        move('up');
-                    }
-                }
-            });
-
-            // Prevent scrolling on touch devices
-            gameContainer.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-            }, { passive: false });
-        }
-
-        function showPopup(message) {
-            popupMessage.textContent = message;
-            popup.style.display = 'block';
-        }
-
-        function closePopup() {
-            popup.style.display = 'none';
-            restartGame();
-        }
-
-        function restartGame() {
-            board = Array(size).fill().map(() => Array(size).fill(0));
-            maxTile = 0;
-            updateBoard();
-            addRandomTile();
-            addRandomTile();
-        }
-
-        function downloadGame() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = '2048_game.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function initGame() {
-            addRandomTile();
-            addRandomTile();
-            setupInput();
-        }
-
-        initGame();
-    </script>
+<body class="font-sans">
+<div id="login-page" class="min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h1 class="text-3xl font-bold text-center mb-6">天庭工作平台</h1>
+    <form id="login-form">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700 text-sm font-bold mb-2">尊号：</label>
+        <select id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="yuhuangdadi">高上神霄玉清真王长生大帝统天元圣天尊</option>
+          <option value="leizu">九天应元雷声普化天尊</option>
+          <option value="wanglingguan">先天主将都天威灵显化天尊</option>
+          <option value="caishen">金龙如意正一龙虎玄坛真君</option>
+          <option value="yuexia">月宫黄华素曜元精圣后太阴元君</option>
+          <option value="huoshen">南方三炁火德星君荧惑执法天尊</option>
+          <option value="taisui">都雷太岁至德尊神</option>
+          <option value="tudishen">清灵洞阳广福真人</option>
+          <option value="doumu">紫金妙相元君</option>
+          <option value="zhenwu">北极玄天上帝</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">密码：</label>
+        <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+      </div>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">登录</button>
+    </form>
+    <p id="login-error" class="text-red-500 text-sm mt-2 text-center"></p>
+  </div>
+</div>
+<div id="dashboard" class="hidden min-h-screen flex flex-col">
+  <header class="navbar shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">天庭工作平台</h1>
+    <nav class="space-x-2">
+      <button onclick="switchTab('home')" class="px-3 py-1 hover:bg-gray-200 rounded">主页</button>
+      <button onclick="switchTab('tasks')" class="px-3 py-1 hover:bg-gray-200 rounded">任务</button>
+      <button onclick="switchTab('calendar')" class="px-3 py-1 hover:bg-gray-200 rounded">日历</button>
+      <button onclick="switchTab('chat')" class="px-3 py-1 hover:bg-gray-200 rounded">聊天</button>
+      <button onclick="switchTab('leaderboard')" class="px-3 py-1 hover:bg-gray-200 rounded">排行榜</button>
+      <button onclick="switchTab('history')" class="px-3 py-1 hover:bg-gray-200 rounded">日志</button>
+      <button onclick="switchTab('approvals')" class="px-3 py-1 hover:bg-gray-200 rounded">审批</button>
+      <button onclick="switchTab('salary')" class="px-3 py-1 hover:bg-gray-200 rounded">工资</button>
+      <button onclick="switchTab('notifications')" class="px-3 py-1 hover:bg-gray-200 rounded">通知</button>
+      <button onclick="switchTab('statistics')" class="px-3 py-1 hover:bg-gray-200 rounded">统计</button>
+      <button onclick="switchTab('settings')" class="px-3 py-1 hover:bg-gray-200 rounded">设置</button>
+    </nav>
+    <button onclick="logout()" class="bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded">退出登录</button>
+  </header>
+  <main id="content-area" class="p-6 flex-1 bg-gray-50"></main>
+</div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <h2 id="modal-title" class="text-xl font-bold mb-4"></h2>
+    <div id="modal-body"></div>
+  </div>
+</div>
+<script>
+function loadDataFromLocalStorage(key){const data=localStorage.getItem(key);return data?JSON.parse(data):[];}
+function saveDataToLocalStorage(key,data){localStorage.setItem(key,JSON.stringify(data));}
+function logAction(action){let logs=loadDataFromLocalStorage("historyLog");logs.push({action:action,timestamp:new Date().toISOString()});saveDataToLocalStorage("historyLog",logs);}
+function getBankAccounts(){let accounts=localStorage.getItem("bankAccounts");return accounts?JSON.parse(accounts):{};}
+function saveBankAccounts(accounts){localStorage.setItem("bankAccounts",JSON.stringify(accounts));}
+function showModal(title,content){document.getElementById("modal-title").textContent=title;document.getElementById("modal-body").innerHTML=content;document.getElementById("myModal").style.display="block";}
+function closeModal(){document.getElementById("myModal").style.display="none";}
+let currentDeity=null; let currentTab="home"; const deities=["yuhuangdadi","leizu","wanglingguan","caishen","yuexia","huoshen","taisui","tudishen","doumu","zhenwu"];
+function sendMessage(){const input=document.getElementById("chat-input"); const content=input.value.trim(); if(content){let messages=loadDataFromLocalStorage("chatMessages"); messages.push({sender:currentDeity,content:content,timestamp:new Date().toISOString()}); saveDataToLocalStorage("chatMessages",messages); input.value=""; renderChat(); logAction(currentDeity+" 发送消息: "+content);}}
+function renderChat(){const messages=loadDataFromLocalStorage("chatMessages"); let html=""; messages.forEach(msg=>{html+=`<div class="p-2 border-b"><strong>${msg.sender}</strong> [${new Date(msg.timestamp).toLocaleString()}]: ${msg.content}</div>`;}); document.getElementById("chat-messages").innerHTML=html;}
+function addApprovalTask(task){let pending=loadDataFromLocalStorage("pendingApprovals"); pending.push(task); saveDataToLocalStorage("pendingApprovals",pending); logAction("添加待审批任务: "+task.description);}
+function renderApprovals(){const pending=loadDataFromLocalStorage("pendingApprovals"); let html=""; pending.forEach((task,index)=>{html+=`<div class="p-2 border rounded mb-2 flex justify-between items-center"><div><p>${task.description} (截止：${new Date(task.deadline).toLocaleString()})</p><p class="text-sm text-gray-500">由 ${task.deity} 提交</p></div><div><button onclick="approveTask(${index})" class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded text-xs">批准</button><button onclick="rejectTask(${index})" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded text-xs">驳回</button></div></div>`;}); document.getElementById("approvals-area").innerHTML=html;}
+function approveTask(index){let pending=loadDataFromLocalStorage("pendingApprovals"); const task=pending.splice(index,1)[0]; let tasks=loadDataFromLocalStorage(`${task.deity}-tasks`); tasks.push(task); saveDataToLocalStorage(`${task.deity}-tasks`,tasks); saveDataToLocalStorage("pendingApprovals",pending); logAction("批准任务: "+task.description); renderApprovals(); if(currentDeity===task.deity) renderTasks(task.deity);}
+function rejectTask(index){let pending=loadDataFromLocalStorage("pendingApprovals"); const task=pending.splice(index,1)[0]; saveDataToLocalStorage("pendingApprovals",pending); logAction("驳回任务: "+task.description); renderApprovals();}
+function generateRandomTask(deity){const priorities=["high","medium","low"]; const randomPriority=priorities[Math.floor(Math.random()*priorities.length)]; const now=new Date(); const deadline=new Date(now.getTime()+Math.random()*7*24*60*60*1000); let taskDescription=""; switch(deity){case "yuhuangdadi":{const arr=["巡视三界","召见仙班","审阅奏章","调解神仙纠纷","制定天规","奖赏有功神仙","惩罚违规神仙","任命新神","主持蟠桃会","与王母议事"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "leizu":{const regions=["江南","华北","西北","西南","东北"]; const weathers=["降雨","降雪","雷暴","冰雹","晴空"]; const arr=[`前往${regions[Math.floor(Math.random()*regions.length)]}地区${weathers[Math.floor(Math.random()*weathers.length)]}`,"巡查雷部","召集雷公电母","审查雷部文书","处理雷击事件","奖赏雷部有功者","惩罚雷部违规者","制定雷部规章","向上级汇报"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "wanglingguan":{const types=["妖魔作祟","凡人纠纷","失物寻回","天灾预警","神仙失职"]; const locations=["青城山","终南山","龙虎山","茅山","武当山","泰山","华山","嵩山"]; const arr=[`处理${locations[Math.floor(Math.random()*locations.length)]}的${types[Math.floor(Math.random()*types.length)]}事件`,"巡视天庭","检查各宫殿","监督神将","处理违规事件","向上级汇报","守护南天门","参与天庭会议"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "caishen":{const arr=["审查香火簿","发放财运","巡查财库","监督财运流通","处理凡人求财","惩罚不义之财","向上级汇报","与其他财神议事"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "yuexia":{const arr=["审查姻缘簿","牵红线","处理凡人求姻缘","调解情感纠纷","监督姻缘","向上级汇报","与其他月老议事","为新人祝福"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "huoshen":{const arr=["监控人间火情","灭火","处理火灾事故","调查火灾原因","警示凡人防火","向上级汇报","与其他火神议事","训练火部兵将"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "taisui":{const arr=["审查犯太岁名单","为人化解太岁","监督太岁轮值","处理太岁相关事宜","向上级汇报","与其他太岁神议事","安抚犯太岁者","讲解太岁知识"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "tudishen":{const arr=["巡查辖区","处理辖区内事务","调解邻里纠纷","保护一方平安","向上级汇报","与其他土地神议事","接受凡人供奉","帮助有困难的凡人"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "doumu":{const arr=["管理星辰","为人消灾解厄","赐福","观察人间运势","向上级汇报","与其他星君议事","接受凡人供奉","护佑信徒"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "zhenwu":{const arr=["降妖除魔","镇守北方","巡查北俱芦洲","处理妖魔作乱事件","向上级汇报","与其他真武大帝座下神将议事","接受凡人供奉","护佑信徒"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} default: taskDescription="处理日常事务";} return {description:taskDescription,priority:randomPriority,deadline:deadline.toISOString(),completed:false,deity:deity};}
+function addTask(deity,task){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); tasks.push(task); saveDataToLocalStorage(`${deity}-tasks`,tasks); renderTasks(deity); logAction(`${deity} 添加任务: ${task.description}`);}
+function toggleTaskCompletion(deity,index){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); tasks[index].completed=!tasks[index].completed; saveDataToLocalStorage(`${deity}-tasks`,tasks); logAction(`${deity} 完成任务: ${tasks[index].description}`); renderTasks(deity);}
+function deleteTask(deity,index){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); logAction(`${deity} 删除任务: ${tasks[index].description}`); tasks.splice(index,1); saveDataToLocalStorage(`${deity}-tasks`,tasks); renderTasks(deity);}
+function addManualTask(){const input=document.getElementById("manual-task-input"); const description=input.value.trim(); const approvalRequired=document.getElementById("approval-checkbox")?document.getElementById("approval-checkbox").checked:false; if(description){const now=new Date(); const deadline=new Date(now.getTime()+7*24*60*60*1000); const task={description:description,priority:"low",deadline:deadline.toISOString(),completed:false,deity:currentDeity}; if(approvalRequired && currentDeity!=="yuhuangdadi"){ addApprovalTask(task); showModal("提示","任务已提交审批！"); } else { addTask(currentDeity,task); } input.value="";}}
+function renderTasks(deity){const tasks=loadDataFromLocalStorage(`${deity}-tasks`)||[]; let html=""; tasks.forEach((task,index)=>{const deadline=new Date(task.deadline); const now=new Date(); const isExpired=deadline<now; html+=`<div class="p-2 border rounded mb-2 flex justify-between items-center ${isExpired?"opacity-50":""}"><div><p class="${task.completed?"line-through":""}">${task.description} (截止：${deadline.toLocaleString()})</p></div><div><button onclick="toggleTaskCompletion('${deity}',${index})" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-xs">${task.completed?"取消完成":"完成"}</button><button onclick="deleteTask('${deity}',${index})" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded text-xs">删除</button></div></div>`;}); document.getElementById("tasks-area").innerHTML=html;}
+function renderCalendar(){const tasks=loadDataFromLocalStorage(`${currentDeity}-tasks`)||[]; const groups={}; tasks.forEach(task=>{const date=new Date(task.deadline).toISOString().slice(0,10); if(!groups[date]) groups[date]=[]; groups[date].push(task);}); let html=""; for(let date in groups){html+=`<h3 class="text-lg font-bold mt-4">${date}</h3>`; groups[date].forEach(task=>{const deadline=new Date(task.deadline); const now=new Date(); let countdown=""; if(deadline>now){const diff=deadline-now; const hours=Math.floor(diff/(1000*60*60)); const minutes=Math.floor((diff%(1000*60*60))/(1000*60)); countdown=`倒计时: ${hours}时 ${minutes}分`; } html+=`<div class="p-2 border rounded mb-2"><p class="${task.completed?"line-through":""}">${task.description} (截止：${deadline.toLocaleString()})</p><p class="text-sm text-red-500">${countdown}</p></div>`;});} document.getElementById("calendar-area").innerHTML=html;}
+function issueDecree(){const decreeInput=document.getElementById("decree-input"); const decree=decreeInput.value.trim(); if(decree){saveDataToLocalStorage("currentDecree",decree); localStorage.removeItem("decreeConfirmed"); decreeInput.value=""; updateDecreeDisplay(); logAction("玉皇大帝发布敕令: "+decree);}}
+function updateDecreeDisplay(){const storedDecree=loadDataFromLocalStorage("currentDecree"); let html=""; if(storedDecree){html=`<p class="mb-2">${storedDecree}</p>`; if(currentDeity!=="yuhuangdadi" && !localStorage.getItem("decreeConfirmed")){html+=`<button onclick="confirmDecree()" class="bg-green-500 hover:bg-green-700 text-white py-1 px-4 rounded">领旨</button>`;}} else {html=`<p>暂无敕令</p>`;} document.getElementById("decree-display").innerHTML=html;}
+function confirmDecree(){localStorage.setItem("decreeConfirmed","true"); updateDecreeDisplay(); showModal("领旨","您已领旨！"); logAction(currentDeity+" 领旨了敕令");}
+function distributeSalaries(){const salaryAmount=1000; const recipients=deities.filter(d=>d!=="yuhuangdadi"); let accounts=getBankAccounts(); recipients.forEach(deity=>{accounts[deity]=(accounts[deity]||0)+salaryAmount;}); saveBankAccounts(accounts); logAction("玉皇大帝发工资：每位神仙获得 "+salaryAmount+" 天币"); showModal("发工资","已成功发放工资，每位神仙获得 "+salaryAmount+" 天币！");}
+function claimSalary(){let accounts=getBankAccounts(); const balance=accounts[currentDeity]||0; if(balance>0){showModal("收工资","您已收到 "+balance+" 天币！"); logAction(currentDeity+" 领取工资: "+balance+" 天币"); accounts[currentDeity]=0; saveBankAccounts(accounts); updateSalaryDisplay();} else {showModal("收工资","当前没有可领取的工资！");}}
+function updateSalaryDisplay(){const accounts=getBankAccounts(); const balance=accounts[currentDeity]||0; document.getElementById("salary-balance").textContent="当前余额: "+balance+" 天币";}
+function renderHistory(){const logs=loadDataFromLocalStorage("historyLog"); let html=""; logs.forEach(log=>{html+=`<div class="p-2 border-b"><p>${log.action}</p><p class="text-sm text-gray-500">${new Date(log.timestamp).toLocaleString()}</p></div>`;}); document.getElementById("history-area").innerHTML=html;}
+function renderLeaderboard(){let leaderboard=[]; deities.forEach(deity=>{const tasks=loadDataFromLocalStorage(`${deity}-tasks`); const completed=tasks.filter(t=>t.completed).length; leaderboard.push({deity:deity,completed:completed});}); leaderboard.sort((a,b)=>b.completed-a.completed); let html=`<table class="min-w-full border"><thead><tr class="bg-gray-200"><th class="px-4 py-2 border">排名</th><th class="px-4 py-2 border">神仙</th><th class="px-4 py-2 border">完成任务数</th></tr></thead><tbody>`; leaderboard.forEach((item,index)=>{html+=`<tr class="${index%2===0?"bg-white":"bg-gray-100"}"><td class="border px-4 py-2">${index+1}</td><td class="border px-4 py-2">${item.deity}</td><td class="border px-4 py-2">${item.completed}</td></tr>`;}); html+=`</tbody></table>`; document.getElementById("leaderboard-area").innerHTML=html;}
+function switchTab(tab){currentTab=tab; let content=""; switch(tab){case "home": if(currentDeity==="yuhuangdadi"){content=`<div class="p-4 bg-white rounded shadow mb-4"><h2 class="text-2xl font-bold mb-2">发布敕令</h2><textarea id="decree-input" class="w-full border rounded p-2" placeholder="输入敕令内容..."></textarea><button onclick="issueDecree()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded">发布</button></div><div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold mb-2">最新敕令</h2><div id="decree-display"></div></div>`;} else {content=`<div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold mb-2">最新敕令</h2><div id="decree-display"></div></div>`;} setTimeout(updateDecreeDisplay,100); break; case "tasks": content=`<div><h2 class="text-2xl font-bold mb-4">我的任务</h2><div id="tasks-area"></div><div class="mt-4"><input type="text" id="manual-task-input" placeholder="输入新任务描述" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"><div class="mt-2"><label class="inline-flex items-center"><input type="checkbox" id="approval-checkbox" class="form-checkbox"><span class="ml-2">需要审批</span></label></div><button onclick="addManualTask()" class="mt-2 bg-green-500 hover:bg-green-700 text-white py-1 px-4 rounded">添加任务</button></div></div>`; setTimeout(()=>{renderTasks(currentDeity);},100); break; case "calendar": content=`<div><h2 class="text-2xl font-bold mb-4">任务日历</h2><div id="calendar-area"></div></div>`; setTimeout(()=>{renderCalendar();},100); break; case "chat": content=`<div><h2 class="text-2xl font-bold mb-4">神仙聊天</h2><div id="chat-messages" class="h-64 overflow-y-scroll bg-white p-2 rounded mb-4"></div><input type="text" id="chat-input" placeholder="输入消息..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"><button onclick="sendMessage()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded">发送</button></div>`; setTimeout(()=>{renderChat();},100); break; case "leaderboard": content=`<div><h2 class="text-2xl font-bold mb-4">任务排行榜</h2><div id="leaderboard-area"></div></div>`; setTimeout(()=>{renderLeaderboard();},100); break; case "history": content=`<div><h2 class="text-2xl font-bold mb-4">操作日志</h2><div id="history-area"></div></div>`; setTimeout(()=>{renderHistory();},100); break; case "approvals": if(currentDeity==="yuhuangdadi"){content=`<div><h2 class="text-2xl font-bold mb-4">待审批任务</h2><div id="approvals-area"></div></div>`; setTimeout(()=>{renderApprovals();},100);} else {content=`<div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold">无权限查看审批</h2></div>`;} break; case "salary": content=`<div><h2 class="text-2xl font-bold mb-4">工资管理</h2><div id="salary-section"><p id="salary-balance"></p><button onclick="claimSalary()" class="mt-2 bg-purple-500 hover:bg-purple-700 text-white py-1 px-4 rounded">收工资</button>${currentDeity==="yuhuangdadi"?`<button onclick="distributeSalaries()" class="mt-2 bg-purple-500 hover:bg-purple-700 text-white py-1 px-4 rounded">发工资</button>`:""}</div></div>`; setTimeout(()=>{updateSalaryDisplay();},100); break; case "notifications": content=`<div><h2 class="text-2xl font-bold mb-4">通知</h2><div id="notifications-area"></div></div>`; setTimeout(()=>{renderNotifications();},100); break; case "statistics": content=`<div><h2 class="text-2xl font-bold mb-4">任务统计</h2><canvas id="statsChart" class="bg-white rounded shadow p-4"></canvas></div>`; setTimeout(()=>{renderStatistics();},100); break; case "settings": content=`<div><h2 class="text-2xl font-bold mb-4">设置</h2><button onclick="toggleTheme()" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-4 rounded">切换主题</button></div>`; break; default: content=`<div><p>未知选项</p></div>`; } document.getElementById("content-area").innerHTML=content; }
+function renderNotifications(){ const tasks=loadDataFromLocalStorage(`${currentDeity}-tasks`)||[]; let html=""; const now=new Date(); tasks.forEach(task=>{ const deadline=new Date(task.deadline); const diff=deadline-now; if(diff>0 && diff<24*60*60*1000 && !task.completed){ html+=`<div class="p-2 border rounded mb-2"><p>${task.description} 将于 ${deadline.toLocaleString()} 截止</p></div>`; } }); if(html==="") html="<p>暂无通知</p>"; document.getElementById("notifications-area").innerHTML=html; }
+function renderStatistics(){ let labels=[]; let data=[]; deities.forEach(deity=>{ const tasks=loadDataFromLocalStorage(`${deity}-tasks`); const completed=tasks.filter(t=>t.completed).length; labels.push(deity); data.push(completed); }); const ctx=document.getElementById("statsChart").getContext("2d"); new Chart(ctx,{type:"bar",data:{labels:labels,datasets:[{label:"完成任务数",data:data,backgroundColor:"rgba(54,162,235,0.6)",borderColor:"rgba(54,162,235,1)",borderWidth:1}]},options:{scales:{y:{beginAtZero:true}}}}); }
+function toggleTheme(){document.body.classList.toggle("dark");}
+document.getElementById("login-form").addEventListener("submit",function(event){event.preventDefault(); const username=document.getElementById("username").value; const password=document.getElementById("password").value; if(password==="111"){showDashboard(username);} else {document.getElementById("login-error").textContent="密码错误！";}});
+function showDashboard(username){ currentDeity=username; document.getElementById("login-page").classList.add("hidden"); document.getElementById("dashboard").classList.remove("hidden"); if(!localStorage.getItem("pendingApprovals")){saveDataToLocalStorage("pendingApprovals",[]);} if(!localStorage.getItem("historyLog")){saveDataToLocalStorage("historyLog",[]);} if(loadDataFromLocalStorage(`${username}-tasks`).length===0){for(let i=0;i<3;i++){addTask(username,generateRandomTask(username));}} switchTab("home"); }
+function logout(){ document.getElementById("login-page").classList.remove("hidden"); document.getElementById("dashboard").classList.add("hidden"); }
+</script>
 </body>
 </html>

@@ -1,113 +1,630 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>天庭工作平台 - 人间智能化办事平台</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-body{background:linear-gradient(135deg,#667eea,#764ba2);} 
-.navbar{background-color:rgba(255,255,255,0.95);} 
-.modal{display:none;position:fixed;z-index:50;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.4);} 
-.modal-content{background-color:#fefefe;margin:10% auto;padding:20px;border:1px solid #888;width:90%;max-width:600px;border-radius:0.5rem;} 
-.close{color:#aaa;float:right;font-size:28px;font-weight:bold;} 
-.close:hover,.close:focus{color:black;text-decoration:none;cursor:pointer;}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<title>综合素养查询2026.2</title>
+<link rel="icon" type="image/x-icon" href="https://o1s00s4d.yichafen.com/Public/static/images/favicon.ico" />
+<link rel="stylesheet" href="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/lib/weui.min.css">
+<link rel="stylesheet" href="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/css/jquery-weui.min.css">
+<script src="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/lib/jquery-2.1.4.js"></script>
+<script src="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/js/jquery-weui.min.js"></script>
+
+<style type="text/css">
+.s_page-header_pic{
+	position:relative;display:table; width:100%;
+}
+.s_page-header_pic .banner-img{
+	position:relative;width:100%;
+}
+.s_page-header_pic .banner-text{
+	position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;width: 100%;font-size:22px;color:#fff;
+}
+.s_page-header_color{
+	padding:45px 20px;text-align:center;font-size:22px;color:#fff;
+}
+body,html{
+	background:#F0EFF4;
+	margin: 0;
+	padding:0;
+	height: 100%;
+}
+#wrapper {
+	min-height: 100%;
+	margin-bottom: -110px;
+}
+.ad-list{
+ margin:10px;
+}
+#footer,.push {
+	height:120px;
+}
+.cert-box{
+	padding:20px;
+}
+.cert-box .cert-row{
+	margin-bottom:10px;
+}
+.cert-box .cert-row .b-txt{
+	font-weight:bold;
+}
+.weui-input{
+	border: 1px solid #ececec;
+	padding:5px;
+	box-sizing: border-box;
+	height: auto;
+	border-radius: 0;
+}
+.weui-cells {
+    font-size: 14px;
+}
+.more-container{
+	font-size:14px;text-align:center;margin-bottom: 10px;
+}
+.more-container a{
+	color:#0066FF;
+}
 </style>
-</head>
-<body class="font-sans">
-<div id="login-page" class="min-h-screen flex items-center justify-center">
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <h1 class="text-3xl font-bold text-center mb-6">天庭工作平台统一登录</h1>
-    <form id="login-form">
-      <div class="mb-4">
-        <label for="username" class="block text-gray-700 text-sm font-bold mb-2">尊号：</label>
-        <select id="username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="yuhuangdadi">高上神霄玉清真王长生大帝统天元圣天尊</option>
-          <option value="leizu">九天应元雷声普化天尊</option>
-          <option value="wanglingguan">先天主将都天威灵显化天尊</option>
-          <option value="caishen">金龙如意正一龙虎玄坛真君</option>
-          <option value="yuexia">月宫黄华素曜元精圣后太阴元君</option>
-          <option value="huoshen">南方三炁火德星君荧惑执法天尊</option>
-          <option value="taisui">都雷太岁至德尊神</option>
-          <option value="tudishen">清灵洞阳广福真人</option>
-          <option value="doumu">紫金妙相元君</option>
-          <option value="zhenwu">北极玄天上帝</option>
-        </select>
-      </div>
-      <div class="mb-6">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">密码：</label>
-        <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
-      </div>
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">登录</button>
-    </form>
-    <p id="login-error" class="text-red-500 text-sm mt-2 text-center"></p>
-  </div>
-</div>
-<div id="dashboard" class="hidden min-h-screen flex flex-col">
-  <header class="navbar shadow-md p-4 flex justify-between items-center">
-    <h1 class="text-xl font-bold">天庭工作平台</h1>
-    <nav class="space-x-2">
-      <button onclick="switchTab('home')" class="px-3 py-1 hover:bg-gray-200 rounded">主页</button>
-      <button onclick="switchTab('tasks')" class="px-3 py-1 hover:bg-gray-200 rounded">任务</button>
-      <button onclick="switchTab('calendar')" class="px-3 py-1 hover:bg-gray-200 rounded">日历</button>
-      <button onclick="switchTab('chat')" class="px-3 py-1 hover:bg-gray-200 rounded">聊天</button>
-      <button onclick="switchTab('leaderboard')" class="px-3 py-1 hover:bg-gray-200 rounded">排行榜</button>
-      <button onclick="switchTab('history')" class="px-3 py-1 hover:bg-gray-200 rounded">日志</button>
-      <button onclick="switchTab('approvals')" class="px-3 py-1 hover:bg-gray-200 rounded">审批</button>
-      <button onclick="switchTab('salary')" class="px-3 py-1 hover:bg-gray-200 rounded">工资</button>
-      <button onclick="switchTab('notifications')" class="px-3 py-1 hover:bg-gray-200 rounded">通知</button>
-      <button onclick="switchTab('statistics')" class="px-3 py-1 hover:bg-gray-200 rounded">统计</button>
-      <button onclick="switchTab('settings')" class="px-3 py-1 hover:bg-gray-200 rounded">设置</button>
-    </nav>
-    <button onclick="logout()" class="bg-red-500 hover:bg-red-700 text-white py-1 px-4 rounded">退出登录</button>
-  </header>
-  <main id="content-area" class="p-6 flex-1 bg-gray-50"></main>
-</div>
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
-    <h2 id="modal-title" class="text-xl font-bold mb-4"></h2>
-    <div id="modal-body"></div>
-  </div>
-</div>
+
+<style type="text/css">
+.weui-select {
+	height: 33px;
+    line-height: 33px;
+}
+.vip-login-tips{
+	margin:20px 15px;
+	font-size:14px;
+}
+.vip-login-tips img{
+	max-width:100%;
+}
+.warning-info{
+	padding:10px;
+	color:red;
+}
+.weui-dialog__bd {
+    padding: 0.8em 1.6em 0.8em;
+}
+.weui-dialog__btn.blue{
+	color: rgb(14, 123, 227);
+}
+</style>
+
+<style>
+body{
+	height:auto;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+html,body{
+	background: #FFFFFF;
+}
+*{ 
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.table-bordered {
+    border: 1px solid #ddd;
+}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid #ddd;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+td, th {
+    padding: 0;
+}
+a:link{text-decoration:none;} 
+a:visited{text-decoration:none;} 
+a:active{text-decoration:none;}
+.table{
+	table-layout:fixed;word-wrap:break-word;
+}.table-bordered>tbody>tr>td, 
+.table-bordered>tbody>tr>th, 
+.table-bordered>tfoot>tr>td, 
+.table-bordered>tfoot>tr>th, 
+.table-bordered>thead>tr>td, 
+.table-bordered>thead>tr>th{
+	border:1px solid #a0cffe;
+}
+.table .left_cell{
+		width:30%;	text-align:left;
+	background:#f0f8ff;
+}
+.table .right_cell{
+		width:70%;	text-align:left;
+	background:#ffffff;
+	word-break: break-all;
+}
+.table .left_cell .form_cell{
+	color:#333333;
+}
+.result_tips{
+	color:#2568cc;
+	padding:0;
+}
+.editable_input{
+	border:1px solid #C0C0C0;
+	width:100%;
+	border-radius:0;
+	font-size:15px;
+}
+.js_result_table input[type=text]{
+	height:30px;
+}
+.js_result_table .radio,.js_result_table .checkbox{
+	vertical-align:middle;
+}
+.js_result_table .label{
+	margin-right: 10px;
+}
+.weui-btn_small{
+	display: inline-block;
+    line-height: 2.3;
+    font-size: 13px;
+}
+.red-star{
+	color: red;
+    vertical-align: middle;
+}
+.js-edit-item .label span{
+	vertical-align: middle;
+}
+.vip-result-tips{
+	margin:20px 0;
+}
+.vip-result-tips img{
+	max-width:100%;
+}
+.scale-img{
+    max-width: 100%;
+}
+.qr-box{
+	background-color:#f2f4f6;
+	padding:10px 20px;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.qr-box .title{
+	font-size:16px;
+	font-weight: bold;
+}
+.qr-box .sub-title{
+	margin-top: 4px;
+}
+.push {
+ 	height:1px;
+}
+.ad-container {
+	padding: 10px; background-color: #EAEAEA;
+}
+.more-opt-box{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+    background: #F9F9F9;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px 0 #CCCCCC;
+    padding: 15px;
+	display:flex;
+	font-size:13px;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+.more-opt-item a{
+	display: flex;
+	align-items: center;
+}
+.more-opt-box.normal-user .more-opt-item a{
+	display: block;
+	font-size: 10px;
+	text-align: center;
+}
+.more-opt-item .icon{
+	height: 14px;
+	width: 14px;
+	margin-right: 4px;
+}
+.more-opt-box.normal-user .more-opt-item .icon{
+	margin-right: 0;
+}
+.more-opt-item a,.more-opt-item a:hover,.more-opt-item a:visited,.more-opt-item a:active{
+	color: #333;
+}
+.weui_btn_plain_primary {
+    color: #04BE02;
+    border: 1px solid #04BE02;
+}
+.separator{
+  width: 1px;
+  height: 15px;
+  background: #cccccc;
+}
+.menu-list-box{
+	width:188px;
+	display:flex;
+	justify-content: space-around;;
+	align-items: center;
+}
+.menu-list-box .more-opt-item:not(:last-child){
+	margin-right: 20px;
+}
+.menu-list-box .more-opt-item .icon{
+	height: 18px;
+	width: 18px;
+}
+.sign-box{
+  border: 1px solid #F1F1F1;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sign-box .flag-img{
+  width: 78px;
+  height: 78px;
+}
+.sign-box .opt-box{
+  text-align: center;
+  flex:1;
+  margin-left: 12px;
+}
+.sign-box .opt-box .opt-title{
+  font-size: 16px;
+  font-weight: 500;
+}
+.sign-box .opt-box .sign-btn{
+  display:inline-block;
+  background: #FFB703;
+  color: #FFFFFF;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+.popup-head{
+  text-align: right;
+}
+.popup-close-box{
+  margin: 8px 8px 0 0;
+  display: inline-block;
+  background: #F1F1F1;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  padding-top: 2px;
+}
+.arrow-down {
+  border: solid #7F7F7F;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.popup-wrapper{
+  padding: 24px 16px 32px;
+  overflow-y: auto;
+}
+.popup-wrapper .status-box{
+  text-align: center;
+  margin-bottom: 16px;
+}
+.popup-wrapper .checkbox-list-box{
+  margin-bottom: 16px;
+}
+.popup-wrapper .status-box .f-img{
+  width: 78px;
+  height: 78px;
+}
+.popup-wrapper .status-box .f-title{
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.popup-wrapper .handwrite-box{
+  background: #F3F8F9;
+  border: 1px dashed #cccccc;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #8a8a8a;
+  font-size: 12px;
+}
+.popup-wrapper .handwrite-box.not-sign{
+  padding: 32px;
+}
+.popup-wrapper .handwrite-box .opt-box{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+.popup-wrapper .handwrite-box .opt-box .icon{
+  margin-right: 6px;
+}
+.popup-wrapper .handwrite-box .icon{
+  width: 16px;
+  height: 16px;
+}
+.popup-wrapper .weui-cell:before {
+	display: none;
+}
+.popup-wrapper .weui-cell{
+	padding: 6px 0;
+}
+</style>
+
 <script>
-function loadDataFromLocalStorage(key){const data=localStorage.getItem(key);return data?JSON.parse(data):[];}
-function saveDataToLocalStorage(key,data){localStorage.setItem(key,JSON.stringify(data));}
-function logAction(action){let logs=loadDataFromLocalStorage("historyLog");logs.push({action:action,timestamp:new Date().toISOString()});saveDataToLocalStorage("historyLog",logs);}
-function getBankAccounts(){let accounts=localStorage.getItem("bankAccounts");return accounts?JSON.parse(accounts):{};}
-function saveBankAccounts(accounts){localStorage.setItem("bankAccounts",JSON.stringify(accounts));}
-function showModal(title,content){document.getElementById("modal-title").textContent=title;document.getElementById("modal-body").innerHTML=content;document.getElementById("myModal").style.display="block";}
-function closeModal(){document.getElementById("myModal").style.display="none";}
-let currentDeity=null; let currentTab="home"; const deities=["yuhuangdadi","leizu","wanglingguan","caishen","yuexia","huoshen","taisui","tudishen","doumu","zhenwu"];
-function sendMessage(){const input=document.getElementById("chat-input"); const content=input.value.trim(); if(content){let messages=loadDataFromLocalStorage("chatMessages"); messages.push({sender:currentDeity,content:content,timestamp:new Date().toISOString()}); saveDataToLocalStorage("chatMessages",messages); input.value=""; renderChat(); logAction(currentDeity+" 发送消息: "+content);}}
-function renderChat(){const messages=loadDataFromLocalStorage("chatMessages"); let html=""; messages.forEach(msg=>{html+=`<div class="p-2 border-b"><strong>${msg.sender}</strong> [${new Date(msg.timestamp).toLocaleString()}]: ${msg.content}</div>`;}); document.getElementById("chat-messages").innerHTML=html;}
-function addApprovalTask(task){let pending=loadDataFromLocalStorage("pendingApprovals"); pending.push(task); saveDataToLocalStorage("pendingApprovals",pending); logAction("添加待审批任务: "+task.description);}
-function renderApprovals(){const pending=loadDataFromLocalStorage("pendingApprovals"); let html=""; pending.forEach((task,index)=>{html+=`<div class="p-2 border rounded mb-2 flex justify-between items-center"><div><p>${task.description} (截止：${new Date(task.deadline).toLocaleString()})</p><p class="text-sm text-gray-500">由 ${task.deity} 提交</p></div><div><button onclick="approveTask(${index})" class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded text-xs">批准</button><button onclick="rejectTask(${index})" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded text-xs">驳回</button></div></div>`;}); document.getElementById("approvals-area").innerHTML=html;}
-function approveTask(index){let pending=loadDataFromLocalStorage("pendingApprovals"); const task=pending.splice(index,1)[0]; let tasks=loadDataFromLocalStorage(`${task.deity}-tasks`); tasks.push(task); saveDataToLocalStorage(`${task.deity}-tasks`,tasks); saveDataToLocalStorage("pendingApprovals",pending); logAction("批准任务: "+task.description); renderApprovals(); if(currentDeity===task.deity) renderTasks(task.deity);}
-function rejectTask(index){let pending=loadDataFromLocalStorage("pendingApprovals"); const task=pending.splice(index,1)[0]; saveDataToLocalStorage("pendingApprovals",pending); logAction("驳回任务: "+task.description); renderApprovals();}
-function generateRandomTask(deity){const priorities=["high","medium","low"]; const randomPriority=priorities[Math.floor(Math.random()*priorities.length)]; const now=new Date(); const deadline=new Date(now.getTime()+Math.random()*7*24*60*60*1000); let taskDescription=""; switch(deity){case "yuhuangdadi":{const arr=["巡视三界","召见仙班","审阅奏章","调解神仙纠纷","制定天规","奖赏有功神仙","惩罚违规神仙","任命新神","主持蟠桃会","与王母议事"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "leizu":{const regions=["江南","华北","西北","西南","东北"]; const weathers=["降雨","降雪","雷暴","冰雹","晴空"]; const arr=[`前往${regions[Math.floor(Math.random()*regions.length)]}地区${weathers[Math.floor(Math.random()*weathers.length)]}`,"巡查雷部","召集雷公电母","审查雷部文书","处理雷击事件","奖赏雷部有功者","惩罚雷部违规者","制定雷部规章","向上级汇报"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "wanglingguan":{const types=["妖魔作祟","凡人纠纷","失物寻回","天灾预警","神仙失职"]; const locations=["青城山","终南山","龙虎山","茅山","武当山","泰山","华山","嵩山"]; const arr=[`处理${locations[Math.floor(Math.random()*locations.length)]}的${types[Math.floor(Math.random()*types.length)]}事件`,"巡视天庭","检查各宫殿","监督神将","处理违规事件","向上级汇报","守护南天门","参与天庭会议"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "caishen":{const arr=["审查香火簿","发放财运","巡查财库","监督财运流通","处理凡人求财","惩罚不义之财","向上级汇报","与其他财神议事"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "yuexia":{const arr=["审查姻缘簿","牵红线","处理凡人求姻缘","调解情感纠纷","监督姻缘","向上级汇报","与其他月老议事","为新人祝福"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "huoshen":{const arr=["监控人间火情","灭火","处理火灾事故","调查火灾原因","警示凡人防火","向上级汇报","与其他火神议事","训练火部兵将"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "taisui":{const arr=["审查犯太岁名单","为人化解太岁","监督太岁轮值","处理太岁相关事宜","向上级汇报","与其他太岁神议事","安抚犯太岁者","讲解太岁知识"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "tudishen":{const arr=["巡查辖区","处理辖区内事务","调解邻里纠纷","保护一方平安","向上级汇报","与其他土地神议事","接受凡人供奉","帮助有困难的凡人"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "doumu":{const arr=["管理星辰","为人消灾解厄","赐福","观察人间运势","向上级汇报","与其他星君议事","接受凡人供奉","护佑信徒"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} case "zhenwu":{const arr=["降妖除魔","镇守北方","巡查北俱芦洲","处理妖魔作乱事件","向上级汇报","与其他真武大帝座下神将议事","接受凡人供奉","护佑信徒"]; taskDescription=arr[Math.floor(Math.random()*arr.length)]; break;} default: taskDescription="处理日常事务";} return {description:taskDescription,priority:randomPriority,deadline:deadline.toISOString(),completed:false,deity:deity};}
-function addTask(deity,task){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); tasks.push(task); saveDataToLocalStorage(`${deity}-tasks`,tasks); renderTasks(deity); logAction(`${deity} 添加任务: ${task.description}`);}
-function toggleTaskCompletion(deity,index){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); tasks[index].completed=!tasks[index].completed; saveDataToLocalStorage(`${deity}-tasks`,tasks); logAction(`${deity} 完成任务: ${tasks[index].description}`); renderTasks(deity);}
-function deleteTask(deity,index){let tasks=loadDataFromLocalStorage(`${deity}-tasks`); logAction(`${deity} 删除任务: ${tasks[index].description}`); tasks.splice(index,1); saveDataToLocalStorage(`${deity}-tasks`,tasks); renderTasks(deity);}
-function addManualTask(){const input=document.getElementById("manual-task-input"); const description=input.value.trim(); const approvalRequired=document.getElementById("approval-checkbox")?document.getElementById("approval-checkbox").checked:false; if(description){const now=new Date(); const deadline=new Date(now.getTime()+7*24*60*60*1000); const task={description:description,priority:"low",deadline:deadline.toISOString(),completed:false,deity:currentDeity}; if(approvalRequired && currentDeity!=="yuhuangdadi"){ addApprovalTask(task); showModal("提示","任务已提交审批！"); } else { addTask(currentDeity,task); } input.value="";}}
-function renderTasks(deity){const tasks=loadDataFromLocalStorage(`${deity}-tasks`)||[]; let html=""; tasks.forEach((task,index)=>{const deadline=new Date(task.deadline); const now=new Date(); const isExpired=deadline<now; html+=`<div class="p-2 border rounded mb-2 flex justify-between items-center ${isExpired?"opacity-50":""}"><div><p class="${task.completed?"line-through":""}">${task.description} (截止：${deadline.toLocaleString()})</p></div><div><button onclick="toggleTaskCompletion('${deity}',${index})" class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-xs">${task.completed?"取消完成":"完成"}</button><button onclick="deleteTask('${deity}',${index})" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded text-xs">删除</button></div></div>`;}); document.getElementById("tasks-area").innerHTML=html;}
-function renderCalendar(){const tasks=loadDataFromLocalStorage(`${currentDeity}-tasks`)||[]; const groups={}; tasks.forEach(task=>{const date=new Date(task.deadline).toISOString().slice(0,10); if(!groups[date]) groups[date]=[]; groups[date].push(task);}); let html=""; for(let date in groups){html+=`<h3 class="text-lg font-bold mt-4">${date}</h3>`; groups[date].forEach(task=>{const deadline=new Date(task.deadline); const now=new Date(); let countdown=""; if(deadline>now){const diff=deadline-now; const hours=Math.floor(diff/(1000*60*60)); const minutes=Math.floor((diff%(1000*60*60))/(1000*60)); countdown=`倒计时: ${hours}时 ${minutes}分`; } html+=`<div class="p-2 border rounded mb-2"><p class="${task.completed?"line-through":""}">${task.description} (截止：${deadline.toLocaleString()})</p><p class="text-sm text-red-500">${countdown}</p></div>`;});} document.getElementById("calendar-area").innerHTML=html;}
-function issueDecree(){const decreeInput=document.getElementById("decree-input"); const decree=decreeInput.value.trim(); if(decree){saveDataToLocalStorage("currentDecree",decree); localStorage.removeItem("decreeConfirmed"); decreeInput.value=""; updateDecreeDisplay(); logAction("玉皇大帝发布敕令: "+decree);}}
-function updateDecreeDisplay(){const storedDecree=loadDataFromLocalStorage("currentDecree"); let html=""; if(storedDecree){html=`<p class="mb-2">${storedDecree}</p>`; if(currentDeity!=="yuhuangdadi" && !localStorage.getItem("decreeConfirmed")){html+=`<button onclick="confirmDecree()" class="bg-green-500 hover:bg-green-700 text-white py-1 px-4 rounded">领旨</button>`;}} else {html=`<p>暂无敕令</p>`;} document.getElementById("decree-display").innerHTML=html;}
-function confirmDecree(){localStorage.setItem("decreeConfirmed","true"); updateDecreeDisplay(); showModal("领旨","您已领旨！"); logAction(currentDeity+" 领旨了敕令");}
-function distributeSalaries(){const salaryAmount=1000; const recipients=deities.filter(d=>d!=="yuhuangdadi"); let accounts=getBankAccounts(); recipients.forEach(deity=>{accounts[deity]=(accounts[deity]||0)+salaryAmount;}); saveBankAccounts(accounts); logAction("玉皇大帝发工资：每位神仙获得 "+salaryAmount+" 天币"); showModal("发工资","已成功发放工资，每位神仙获得 "+salaryAmount+" 天币！");}
-function claimSalary(){let accounts=getBankAccounts(); const balance=accounts[currentDeity]||0; if(balance>0){showModal("收工资","您已收到 "+balance+" 天币！"); logAction(currentDeity+" 领取工资: "+balance+" 天币"); accounts[currentDeity]=0; saveBankAccounts(accounts); updateSalaryDisplay();} else {showModal("收工资","当前没有可领取的工资！");}}
-function updateSalaryDisplay(){const accounts=getBankAccounts(); const balance=accounts[currentDeity]||0; document.getElementById("salary-balance").textContent="当前余额: "+balance+" 天币";}
-function renderHistory(){const logs=loadDataFromLocalStorage("historyLog"); let html=""; logs.forEach(log=>{html+=`<div class="p-2 border-b"><p>${log.action}</p><p class="text-sm text-gray-500">${new Date(log.timestamp).toLocaleString()}</p></div>`;}); document.getElementById("history-area").innerHTML=html;}
-function renderLeaderboard(){let leaderboard=[]; deities.forEach(deity=>{const tasks=loadDataFromLocalStorage(`${deity}-tasks`); const completed=tasks.filter(t=>t.completed).length; leaderboard.push({deity:deity,completed:completed});}); leaderboard.sort((a,b)=>b.completed-a.completed); let html=`<table class="min-w-full border"><thead><tr class="bg-gray-200"><th class="px-4 py-2 border">排名</th><th class="px-4 py-2 border">神仙</th><th class="px-4 py-2 border">完成任务数</th></tr></thead><tbody>`; leaderboard.forEach((item,index)=>{html+=`<tr class="${index%2===0?"bg-white":"bg-gray-100"}"><td class="border px-4 py-2">${index+1}</td><td class="border px-4 py-2">${item.deity}</td><td class="border px-4 py-2">${item.completed}</td></tr>`;}); html+=`</tbody></table>`; document.getElementById("leaderboard-area").innerHTML=html;}
-function switchTab(tab){currentTab=tab; let content=""; switch(tab){case "home": if(currentDeity==="yuhuangdadi"){content=`<div class="p-4 bg-white rounded shadow mb-4"><h2 class="text-2xl font-bold mb-2">发布敕令</h2><textarea id="decree-input" class="w-full border rounded p-2" placeholder="输入敕令内容..."></textarea><button onclick="issueDecree()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded">发布</button></div><div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold mb-2">最新敕令</h2><div id="decree-display"></div></div>`;} else {content=`<div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold mb-2">最新敕令</h2><div id="decree-display"></div></div>`;} setTimeout(updateDecreeDisplay,100); break; case "tasks": content=`<div><h2 class="text-2xl font-bold mb-4">我的任务</h2><div id="tasks-area"></div><div class="mt-4"><input type="text" id="manual-task-input" placeholder="输入新任务描述" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"><div class="mt-2"><label class="inline-flex items-center"><input type="checkbox" id="approval-checkbox" class="form-checkbox"><span class="ml-2">需要审批</span></label></div><button onclick="addManualTask()" class="mt-2 bg-green-500 hover:bg-green-700 text-white py-1 px-4 rounded">添加任务</button></div></div>`; setTimeout(()=>{renderTasks(currentDeity);},100); break; case "calendar": content=`<div><h2 class="text-2xl font-bold mb-4">任务日历</h2><div id="calendar-area"></div></div>`; setTimeout(()=>{renderCalendar();},100); break; case "chat": content=`<div><h2 class="text-2xl font-bold mb-4">神仙聊天</h2><div id="chat-messages" class="h-64 overflow-y-scroll bg-white p-2 rounded mb-4"></div><input type="text" id="chat-input" placeholder="输入消息..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"><button onclick="sendMessage()" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded">发送</button></div>`; setTimeout(()=>{renderChat();},100); break; case "leaderboard": content=`<div><h2 class="text-2xl font-bold mb-4">任务排行榜</h2><div id="leaderboard-area"></div></div>`; setTimeout(()=>{renderLeaderboard();},100); break; case "history": content=`<div><h2 class="text-2xl font-bold mb-4">操作日志</h2><div id="history-area"></div></div>`; setTimeout(()=>{renderHistory();},100); break; case "approvals": if(currentDeity==="yuhuangdadi"){content=`<div><h2 class="text-2xl font-bold mb-4">待审批任务</h2><div id="approvals-area"></div></div>`; setTimeout(()=>{renderApprovals();},100);} else {content=`<div class="p-4 bg-white rounded shadow"><h2 class="text-2xl font-bold">无权限查看审批</h2></div>`;} break; case "salary": content=`<div><h2 class="text-2xl font-bold mb-4">工资管理</h2><div id="salary-section"><p id="salary-balance"></p><button onclick="claimSalary()" class="mt-2 bg-purple-500 hover:bg-purple-700 text-white py-1 px-4 rounded">收工资</button>${currentDeity==="yuhuangdadi"?`<button onclick="distributeSalaries()" class="mt-2 bg-purple-500 hover:bg-purple-700 text-white py-1 px-4 rounded">发工资</button>`:""}</div></div>`; setTimeout(()=>{updateSalaryDisplay();},100); break; case "notifications": content=`<div><h2 class="text-2xl font-bold mb-4">通知</h2><div id="notifications-area"></div></div>`; setTimeout(()=>{renderNotifications();},100); break; case "statistics": content=`<div><h2 class="text-2xl font-bold mb-4">任务统计</h2><canvas id="statsChart" class="bg-white rounded shadow p-4"></canvas></div>`; setTimeout(()=>{renderStatistics();},100); break; case "settings": content=`<div><h2 class="text-2xl font-bold mb-4">设置</h2><button onclick="toggleTheme()" class="bg-gray-500 hover:bg-gray-700 text-white py-1 px-4 rounded">切换主题</button></div>`; break; default: content=`<div><p>未知选项</p></div>`; } document.getElementById("content-area").innerHTML=content; }
-function renderNotifications(){ const tasks=loadDataFromLocalStorage(`${currentDeity}-tasks`)||[]; let html=""; const now=new Date(); tasks.forEach(task=>{ const deadline=new Date(task.deadline); const diff=deadline-now; if(diff>0 && diff<24*60*60*1000 && !task.completed){ html+=`<div class="p-2 border rounded mb-2"><p>${task.description} 将于 ${deadline.toLocaleString()} 截止</p></div>`; } }); if(html==="") html="<p>暂无通知</p>"; document.getElementById("notifications-area").innerHTML=html; }
-function renderStatistics(){ let labels=[]; let data=[]; deities.forEach(deity=>{ const tasks=loadDataFromLocalStorage(`${deity}-tasks`); const completed=tasks.filter(t=>t.completed).length; labels.push(deity); data.push(completed); }); const ctx=document.getElementById("statsChart").getContext("2d"); new Chart(ctx,{type:"bar",data:{labels:labels,datasets:[{label:"完成任务数",data:data,backgroundColor:"rgba(54,162,235,0.6)",borderColor:"rgba(54,162,235,1)",borderWidth:1}]},options:{scales:{y:{beginAtZero:true}}}}); }
-function toggleTheme(){document.body.classList.toggle("dark");}
-document.getElementById("login-form").addEventListener("submit",function(event){event.preventDefault(); const username=document.getElementById("username").value; const password=document.getElementById("password").value; if(password==="111"){showDashboard(username);} else {document.getElementById("login-error").textContent="密码错误！";}});
-function showDashboard(username){ currentDeity=username; document.getElementById("login-page").classList.add("hidden"); document.getElementById("dashboard").classList.remove("hidden"); if(!localStorage.getItem("pendingApprovals")){saveDataToLocalStorage("pendingApprovals",[]);} if(!localStorage.getItem("historyLog")){saveDataToLocalStorage("historyLog",[]);} if(loadDataFromLocalStorage(`${username}-tasks`).length===0){for(let i=0;i<3;i++){addTask(username,generateRandomTask(username));}} switchTab("home"); }
-function logout(){ document.getElementById("login-page").classList.remove("hidden"); document.getElementById("dashboard").classList.add("hidden"); }
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ca667b4e604f41172ad66175206437c5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script>
+
+</head>
+<body style="height: 100%;">
+
+<div id="wrapper_login">
+    <div class="s_page-header_color" style="background:#0166cc;">
+    综合素养查询2026.2	</div>
+    
+    <form id="form-data" onsubmit="return false">
+        <div style="margin:20px 15px;color:#000;font-size:14px;">查询号为班级+学生身份证号后六位.示例：1班学生，后身份证号为123456，则查询号为：01123456</div><div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">查询号</label></div>
+            <div class="weui-cell__bd">
+                                                    <input class="weui-input" data-sname="查询号" name="s_chaxunhao" id="s_chaxunhao_input" type="text" placeholder="请输入查询号">	    </div>
+        </div>		<div id="jsPicVerifyBox">
+            </div>
+        </div>
+    </form>
+    <div class="weui-btn-area">
+        <button type="button" class="weui-btn weui-btn_primary" id="yiDunSubmitBtn" style="background:#1aad19;color:#ffffff;">查询</button>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+        <a style="color: #6D6D6D;font-size: 14px;" href="https://mp.weixin.qq.com/s/ZUM7barrngkTxpgaJWJhKg">查询必读</a>
+    </div>
+    <div class="push"></div>
+</div>
+
+<div id="fixed-footer" style="position:fixed;bottom:0;text-align:center;width:100%;background:#F0EFF4;padding: 10px 10px 50px;box-sizing: border-box;z-index:99;">
+    <div class="more-container">
+                    <a href="/index/sharefriend.html">分享好友</a> | 
+        <a href="/index/subnotice.html">订阅通知</a> | 
+        <a href="/index/myfav.html">我的保存</a>
+    </div>
+    <a href="https://mp.weixin.qq.com/s/oRm2vWKBL2syfmCo8ZJ89g" style="display:block;font-size:14px;margin-top:4px;">
+        <span style="color:#6D6D6D;">
+            <span>本查询使用</span>
+            <span>
+                <img style="height:24px; vertical-align: -0.5em;" src="https://o1s00s4d.yichafen.com/Public/static/images/ycfwpt-logo.png"/>
+                <span style="font-size:15px;color:#000;font-weight:bold;">易查分</span>
+            </span>
+            <span>制作，</span>
+            <span style="color:#34A765;">免费制作查询 ></span>
+        </span>
+    </a>
+</div>
+
+<div id="wrapper" style="display:none;">
+    <div style="padding: 20px 20px 0;text-align: center;font-size: 22px;color: #333333;">查询结果</div>
+    
+    <div id="result_content" style="padding:10px 15px;background: #FFFFFF;">
+        <div id="result_data_table">
+            <table class="table table-bordered s_table-bordered js_result_table" data-id="1385" id="score_table">
+            </table>		
+        </div>
+        <div style="text-align:center;margin-top:10px;">
+        </div>
+        <div class="result_tips" style="margin:20px 0;">对查询结果有疑问请联系我们</div>			
+        <div class="qr-box">
+            <div>
+                <div class="title">长按关注查询公众号</div>
+                <div class="sub-title">快速进入查询 保存结果 接收通知</div>
+            </div>
+            <div>
+                <img style="width:100px;height:100px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQG38DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyaVhQaElBYUdlaUkxMDAwMDAwN0EAAgTDSXNoAwQAAAAA"/>
+            </div>
+        </div>
+    </div>
+    <div style="height:70px;"></div>
+    
+    <div class="more-opt-box normal-user" style="display:none;">
+        <div>
+            <a href="https://mp.weixin.qq.com/s/AYsbckKKIrOK9O59kzntBg" style="display:inline-flex;align-items:center;">
+                <img style="height:24px;" src="https://o1s00s4d.yichafen.com/Public/static/images/ycfwpt-logo.png"/>
+                <span style="font-size:15px;color:#000;font-weight:bold;">发成绩用<span style="color:#2568cc;">易查分</span></span>
+                <img style="width: 20px;height: 20px;margin-top:2px;" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/right-arrow.png"/>
+            </a>
+        </div>
+        <div class="menu-list-box">
+            <div class="more-opt-item" id="doLockBtn">
+                <a href="javascript:;">
+                    <img class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/lock.png"/>
+                    <div class="txt">锁定</div>
+                </a>
+            </div>
+            <div class="more-opt-item">
+                <a href="https://mp.weixin.qq.com/s/MTDTmDdokbwZfdOS0STFOA">
+                    <img class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/share.png"/>
+                    <div class="txt">分享</div>
+                </a>
+            </div>
+            <div class="more-opt-item">
+                <a style="color:#FFFFFF;display:inline-flex;font-size:12px;padding: 4px 8px;line-height:1.6;justify-content: center;" href="https://mp.weixin.qq.com/s/u7Ac_8BttJBIFWojUlUpjg" class="weui-btn weui-btn_primary">
+                    <img style="width:13px;height:13px;" class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/save-white.png"/><span style="margin-left:2px;">保存</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+
+<script type="text/javascript" src="https://o1s00s4d.yichafen.com/Public/static/js/common.js?v=1"></script>
+<script src="/Public/static/jquery_weui/js/city-picker.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var windowWidth = window.innerWidth;
+    if(windowWidth>600){
+        $('body,html').css({background:'gray'});
+        
+        $("#wrapper_login").css({width:'600px',margin:'0 auto -110px', background:'#F0EFF4', minHeight: '100%'});
+        if($('#wrapper_login').height() < window.innerHeight){
+            $("#wrapper_login").css({height:window.innerHeight+'px'});
+        }
+        
+        $('#fixed-footer').css({width:'600px', left:0, right:0, margin:'0 auto'});
+    }
+
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function getScores(id) {
+        var real_cls = id.substring(0, 2);
+
+        var key = 'ycf_score_' + id;
+        var saved = localStorage.getItem(key);
+        
+        if (saved) {
+            var data = JSON.parse(saved);
+            data.cls = real_cls; 
+            return data;
+        }
+
+        var yw = getRandom(110, 122); 
+        var sx = getRandom(122, 140); 
+        var wy = getRandom(105, 135); 
+
+        var wl_raw = getRandom(70, 85); 
+        var wl_assign = getRandom(Math.max(wl_raw, 91), 100); 
+
+        var hx_raw = getRandom(70, 88); 
+        var hx_assign = getRandom(Math.max(hx_raw, 91), 99); 
+
+        var sw_raw = getRandom(80, 98); 
+        var sw_assign = getRandom(Math.max(sw_raw, 92), 100); 
+        
+        var raw_total = yw + sx + wy + wl_raw + hx_raw + sw_raw;
+        var assign_total = yw + sx + wy + wl_assign + hx_assign + sw_assign;
+
+        var cls_rank = getRandom(4, 8); 
+        var grade_rank = getRandom(40, 150); 
+
+        var data = {
+            id: id, 
+            cls: real_cls, 
+            cls_rank: cls_rank, grade_rank: grade_rank,
+            raw_total: raw_total, assign_total: assign_total,
+            yw: yw, yw_rank: getRandom(1, 150),
+            sx: sx, sx_rank: getRandom(1, 50),
+            wy: wy, wy_rank: getRandom(1, 100),
+            wl_raw: wl_raw, wl_assign: wl_assign, wl_rank: getRandom(1, 80),
+            hx_raw: hx_raw, hx_assign: hx_assign, hx_rank: getRandom(1, 90),
+            sw_raw: sw_raw, sw_assign: sw_assign, sw_rank: getRandom(1, 70)
+        };
+        localStorage.setItem(key, JSON.stringify(data));
+        return data;
+    }
+
+    function buildTableHtml(data) {
+        var html = '';
+        function row(label, val) {
+            return '<tr><td class="left_cell"><span>' + label + '</span></td><td class="right_cell">' + val + '</td></tr>';
+        }
+        html += row("班级", data.cls);
+        html += row("序", data.cls_rank);
+        html += row("查询号", data.id);
+        html += row("原总", data.raw_total);
+        html += row("总等", data.assign_total);
+        html += row("序", data.grade_rank);
+        html += row("语文", data.yw);
+        html += row("序", data.yw_rank);
+        html += row("数学", data.sx);
+        html += row("序", data.sx_rank);
+        html += row("外语", data.wy);
+        html += row("序", data.wy_rank);
+        html += row("物理", data.wl_raw);
+        html += row("物等", data.wl_assign);
+        html += row("序", data.wl_rank);
+        html += row("化学", data.hx_raw);
+        html += row("化等", data.hx_assign);
+        html += row("序", data.hx_rank);
+        html += row("生物", data.sw_raw);
+        html += row("生等", data.sw_assign);
+        html += row("序", data.sw_rank);
+        html += row("政治", ""); html += row("政等", ""); html += row("序", "");
+        html += row("历史", ""); html += row("历等", ""); html += row("序", "");
+        html += row("地理", ""); html += row("地等", ""); html += row("序", "");
+        return html;
+    }
+
+    $("#yiDunSubmitBtn").unbind('click').click(function() {
+        var inputVal = $("#s_chaxunhao_input").val();
+        if (!inputVal) {
+            $.alert("请输入查询号");
+            return;
+        }
+
+        var $btn = $(this);
+        $btn.addClass('weui-btn_disabled').text('查询中...');
+        
+        setTimeout(function() {
+            var scoreData = getScores(inputVal);
+            $("#score_table").html(buildTableHtml(scoreData));
+
+            $("#wrapper_login").hide();
+            $("#fixed-footer").hide();
+
+            $("#wrapper").show();
+            $(".more-opt-box").css('display', 'flex'); 
+
+            if(windowWidth > 600) {
+                $("#wrapper").css({width:'600px', margin:'0 auto', background:'#FFFFFF', minHeight: '100%'});
+                $('.more-opt-box').css({width: '600px', left:0, right:0, margin:'0 auto'});
+            } else {
+                $('body,html').css({background:'#FFFFFF'});
+            }
+
+            $(window).scrollTop(0);
+            $btn.removeClass('weui-btn_disabled').text('查询');
+        }, 800);
+    });
+});
+</script>
+
 </body>
 </html>

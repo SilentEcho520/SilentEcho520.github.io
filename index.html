@@ -1,630 +1,2795 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta content="yes" name="apple-mobile-web-app-capable">
-<title>综合素养查询2026.2</title>
-<link rel="icon" type="image/x-icon" href="https://o1s00s4d.yichafen.com/Public/static/images/favicon.ico" />
-<link rel="stylesheet" href="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/lib/weui.min.css">
-<link rel="stylesheet" href="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/css/jquery-weui.min.css">
-<script src="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/lib/jquery-2.1.4.js"></script>
-<script src="https://o1s00s4d.yichafen.com/Public/static/jquery_weui/js/jquery-weui.min.js"></script>
-
-<style type="text/css">
-.s_page-header_pic{
-	position:relative;display:table; width:100%;
-}
-.s_page-header_pic .banner-img{
-	position:relative;width:100%;
-}
-.s_page-header_pic .banner-text{
-	position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;width: 100%;font-size:22px;color:#fff;
-}
-.s_page-header_color{
-	padding:45px 20px;text-align:center;font-size:22px;color:#fff;
-}
-body,html{
-	background:#F0EFF4;
-	margin: 0;
-	padding:0;
-	height: 100%;
-}
-#wrapper {
-	min-height: 100%;
-	margin-bottom: -110px;
-}
-.ad-list{
- margin:10px;
-}
-#footer,.push {
-	height:120px;
-}
-.cert-box{
-	padding:20px;
-}
-.cert-box .cert-row{
-	margin-bottom:10px;
-}
-.cert-box .cert-row .b-txt{
-	font-weight:bold;
-}
-.weui-input{
-	border: 1px solid #ececec;
-	padding:5px;
-	box-sizing: border-box;
-	height: auto;
-	border-radius: 0;
-}
-.weui-cells {
-    font-size: 14px;
-}
-.more-container{
-	font-size:14px;text-align:center;margin-bottom: 10px;
-}
-.more-container a{
-	color:#0066FF;
-}
-</style>
-
-<style type="text/css">
-.weui-select {
-	height: 33px;
-    line-height: 33px;
-}
-.vip-login-tips{
-	margin:20px 15px;
-	font-size:14px;
-}
-.vip-login-tips img{
-	max-width:100%;
-}
-.warning-info{
-	padding:10px;
-	color:red;
-}
-.weui-dialog__bd {
-    padding: 0.8em 1.6em 0.8em;
-}
-.weui-dialog__btn.blue{
-	color: rgb(14, 123, 227);
-}
-</style>
-
-<style>
-body{
-	height:auto;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-}
-html,body{
-	background: #FFFFFF;
-}
-*{ 
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color: transparent;
-	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    background-color: transparent;
-}
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 10px;
-}
-.table-bordered {
-    border: 1px solid #ddd;
-}
-.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
-    border: 1px solid #ddd;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-}
-td, th {
-    padding: 0;
-}
-a:link{text-decoration:none;} 
-a:visited{text-decoration:none;} 
-a:active{text-decoration:none;}
-.table{
-	table-layout:fixed;word-wrap:break-word;
-}.table-bordered>tbody>tr>td, 
-.table-bordered>tbody>tr>th, 
-.table-bordered>tfoot>tr>td, 
-.table-bordered>tfoot>tr>th, 
-.table-bordered>thead>tr>td, 
-.table-bordered>thead>tr>th{
-	border:1px solid #a0cffe;
-}
-.table .left_cell{
-		width:30%;	text-align:left;
-	background:#f0f8ff;
-}
-.table .right_cell{
-		width:70%;	text-align:left;
-	background:#ffffff;
-	word-break: break-all;
-}
-.table .left_cell .form_cell{
-	color:#333333;
-}
-.result_tips{
-	color:#2568cc;
-	padding:0;
-}
-.editable_input{
-	border:1px solid #C0C0C0;
-	width:100%;
-	border-radius:0;
-	font-size:15px;
-}
-.js_result_table input[type=text]{
-	height:30px;
-}
-.js_result_table .radio,.js_result_table .checkbox{
-	vertical-align:middle;
-}
-.js_result_table .label{
-	margin-right: 10px;
-}
-.weui-btn_small{
-	display: inline-block;
-    line-height: 2.3;
-    font-size: 13px;
-}
-.red-star{
-	color: red;
-    vertical-align: middle;
-}
-.js-edit-item .label span{
-	vertical-align: middle;
-}
-.vip-result-tips{
-	margin:20px 0;
-}
-.vip-result-tips img{
-	max-width:100%;
-}
-.scale-img{
-    max-width: 100%;
-}
-.qr-box{
-	background-color:#f2f4f6;
-	padding:10px 20px;
-	display:flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.qr-box .title{
-	font-size:16px;
-	font-weight: bold;
-}
-.qr-box .sub-title{
-	margin-top: 4px;
-}
-.push {
- 	height:1px;
-}
-.ad-container {
-	padding: 10px; background-color: #EAEAEA;
-}
-.more-opt-box{
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-    background: #F9F9F9;
-    box-sizing: border-box;
-    box-shadow: 0 4px 12px 0 #CCCCCC;
-    padding: 15px;
-	display:flex;
-	font-size:13px;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-}
-.more-opt-item a{
-	display: flex;
-	align-items: center;
-}
-.more-opt-box.normal-user .more-opt-item a{
-	display: block;
-	font-size: 10px;
-	text-align: center;
-}
-.more-opt-item .icon{
-	height: 14px;
-	width: 14px;
-	margin-right: 4px;
-}
-.more-opt-box.normal-user .more-opt-item .icon{
-	margin-right: 0;
-}
-.more-opt-item a,.more-opt-item a:hover,.more-opt-item a:visited,.more-opt-item a:active{
-	color: #333;
-}
-.weui_btn_plain_primary {
-    color: #04BE02;
-    border: 1px solid #04BE02;
-}
-.separator{
-  width: 1px;
-  height: 15px;
-  background: #cccccc;
-}
-.menu-list-box{
-	width:188px;
-	display:flex;
-	justify-content: space-around;;
-	align-items: center;
-}
-.menu-list-box .more-opt-item:not(:last-child){
-	margin-right: 20px;
-}
-.menu-list-box .more-opt-item .icon{
-	height: 18px;
-	width: 18px;
-}
-.sign-box{
-  border: 1px solid #F1F1F1;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sign-box .flag-img{
-  width: 78px;
-  height: 78px;
-}
-.sign-box .opt-box{
-  text-align: center;
-  flex:1;
-  margin-left: 12px;
-}
-.sign-box .opt-box .opt-title{
-  font-size: 16px;
-  font-weight: 500;
-}
-.sign-box .opt-box .sign-btn{
-  display:inline-block;
-  background: #FFB703;
-  color: #FFFFFF;
-  padding: 4px 12px;
-  border-radius: 4px;
-  margin-top: 16px;
-}
-.popup-head{
-  text-align: right;
-}
-.popup-close-box{
-  margin: 8px 8px 0 0;
-  display: inline-block;
-  background: #F1F1F1;
-  width: 28px;
-  height: 28px;
-  text-align: center;
-  border-radius: 50%;
-  padding-top: 2px;
-}
-.arrow-down {
-  border: solid #7F7F7F;
-  border-width: 0 2px 2px 0;
-  display: inline-block;
-  padding: 4px;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-.popup-wrapper{
-  padding: 24px 16px 32px;
-  overflow-y: auto;
-}
-.popup-wrapper .status-box{
-  text-align: center;
-  margin-bottom: 16px;
-}
-.popup-wrapper .checkbox-list-box{
-  margin-bottom: 16px;
-}
-.popup-wrapper .status-box .f-img{
-  width: 78px;
-  height: 78px;
-}
-.popup-wrapper .status-box .f-title{
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 4px;
-}
-.popup-wrapper .handwrite-box{
-  background: #F3F8F9;
-  border: 1px dashed #cccccc;
-  border-radius: 2px;
-  margin-bottom: 16px;
-  text-align: center;
-  color: #8a8a8a;
-  font-size: 12px;
-}
-.popup-wrapper .handwrite-box.not-sign{
-  padding: 32px;
-}
-.popup-wrapper .handwrite-box .opt-box{
-  display: flex;
-  justify-content: center;
-  padding-bottom: 12px;
-}
-.popup-wrapper .handwrite-box .opt-box .icon{
-  margin-right: 6px;
-}
-.popup-wrapper .handwrite-box .icon{
-  width: 16px;
-  height: 16px;
-}
-.popup-wrapper .weui-cell:before {
-	display: none;
-}
-.popup-wrapper .weui-cell{
-	padding: 6px 0;
-}
-</style>
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?ca667b4e604f41172ad66175206437c5";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-</head>
-<body style="height: 100%;">
-
-<div id="wrapper_login">
-    <div class="s_page-header_color" style="background:#0166cc;">
-    综合素养查询2026.2	</div>
-    
-    <form id="form-data" onsubmit="return false">
-        <div style="margin:20px 15px;color:#000;font-size:14px;">查询号为班级+学生身份证号后六位.示例：1班学生，后身份证号为123456，则查询号为：01123456</div><div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label">查询号</label></div>
-            <div class="weui-cell__bd">
-                                                    <input class="weui-input" data-sname="查询号" name="s_chaxunhao" id="s_chaxunhao_input" type="text" placeholder="请输入查询号">	    </div>
-        </div>		<div id="jsPicVerifyBox">
-            </div>
-        </div>
-    </form>
-    <div class="weui-btn-area">
-        <button type="button" class="weui-btn weui-btn_primary" id="yiDunSubmitBtn" style="background:#1aad19;color:#ffffff;">查询</button>
-    </div>
-    <div style="text-align:center;margin-top:20px;">
-        <a style="color: #6D6D6D;font-size: 14px;" href="https://mp.weixin.qq.com/s/ZUM7barrngkTxpgaJWJhKg">查询必读</a>
-    </div>
-    <div class="push"></div>
-</div>
-
-<div id="fixed-footer" style="position:fixed;bottom:0;text-align:center;width:100%;background:#F0EFF4;padding: 10px 10px 50px;box-sizing: border-box;z-index:99;">
-    <div class="more-container">
-                    <a href="/index/sharefriend.html">分享好友</a> | 
-        <a href="/index/subnotice.html">订阅通知</a> | 
-        <a href="/index/myfav.html">我的保存</a>
-    </div>
-    <a href="https://mp.weixin.qq.com/s/oRm2vWKBL2syfmCo8ZJ89g" style="display:block;font-size:14px;margin-top:4px;">
-        <span style="color:#6D6D6D;">
-            <span>本查询使用</span>
-            <span>
-                <img style="height:24px; vertical-align: -0.5em;" src="https://o1s00s4d.yichafen.com/Public/static/images/ycfwpt-logo.png"/>
-                <span style="font-size:15px;color:#000;font-weight:bold;">易查分</span>
-            </span>
-            <span>制作，</span>
-            <span style="color:#34A765;">免费制作查询 ></span>
-        </span>
-    </a>
-</div>
-
-<div id="wrapper" style="display:none;">
-    <div style="padding: 20px 20px 0;text-align: center;font-size: 22px;color: #333333;">查询结果</div>
-    
-    <div id="result_content" style="padding:10px 15px;background: #FFFFFF;">
-        <div id="result_data_table">
-            <table class="table table-bordered s_table-bordered js_result_table" data-id="1385" id="score_table">
-            </table>		
-        </div>
-        <div style="text-align:center;margin-top:10px;">
-        </div>
-        <div class="result_tips" style="margin:20px 0;">对查询结果有疑问请联系我们</div>			
-        <div class="qr-box">
-            <div>
-                <div class="title">长按关注查询公众号</div>
-                <div class="sub-title">快速进入查询 保存结果 接收通知</div>
-            </div>
-            <div>
-                <img style="width:100px;height:100px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQG38DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyaVhQaElBYUdlaUkxMDAwMDAwN0EAAgTDSXNoAwQAAAAA"/>
-            </div>
-        </div>
-    </div>
-    <div style="height:70px;"></div>
-    
-    <div class="more-opt-box normal-user" style="display:none;">
-        <div>
-            <a href="https://mp.weixin.qq.com/s/AYsbckKKIrOK9O59kzntBg" style="display:inline-flex;align-items:center;">
-                <img style="height:24px;" src="https://o1s00s4d.yichafen.com/Public/static/images/ycfwpt-logo.png"/>
-                <span style="font-size:15px;color:#000;font-weight:bold;">发成绩用<span style="color:#2568cc;">易查分</span></span>
-                <img style="width: 20px;height: 20px;margin-top:2px;" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/right-arrow.png"/>
-            </a>
-        </div>
-        <div class="menu-list-box">
-            <div class="more-opt-item" id="doLockBtn">
-                <a href="javascript:;">
-                    <img class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/lock.png"/>
-                    <div class="txt">锁定</div>
-                </a>
-            </div>
-            <div class="more-opt-item">
-                <a href="https://mp.weixin.qq.com/s/MTDTmDdokbwZfdOS0STFOA">
-                    <img class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/share.png"/>
-                    <div class="txt">分享</div>
-                </a>
-            </div>
-            <div class="more-opt-item">
-                <a style="color:#FFFFFF;display:inline-flex;font-size:12px;padding: 4px 8px;line-height:1.6;justify-content: center;" href="https://mp.weixin.qq.com/s/u7Ac_8BttJBIFWojUlUpjg" class="weui-btn weui-btn_primary">
-                    <img style="width:13px;height:13px;" class="icon" src="https://o1s00s4d.yichafen.com/Public/Mark/images/result/save-white.png"/><span style="margin-left:2px;">保存</span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="push"></div>
-</div>
-
-<script type="text/javascript" src="https://o1s00s4d.yichafen.com/Public/static/js/common.js?v=1"></script>
-<script src="/Public/static/jquery_weui/js/city-picker.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    var windowWidth = window.innerWidth;
-    if(windowWidth>600){
-        $('body,html').css({background:'gray'});
-        
-        $("#wrapper_login").css({width:'600px',margin:'0 auto -110px', background:'#F0EFF4', minHeight: '100%'});
-        if($('#wrapper_login').height() < window.innerHeight){
-            $("#wrapper_login").css({height:window.innerHeight+'px'});
-        }
-        
-        $('#fixed-footer').css({width:'600px', left:0, right:0, margin:'0 auto'});
-    }
-
-    function getRandom(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function getScores(id) {
-        var real_cls = id.substring(0, 2);
-
-        var key = 'ycf_score_' + id;
-        var saved = localStorage.getItem(key);
-        
-        if (saved) {
-            var data = JSON.parse(saved);
-            data.cls = real_cls; 
-            return data;
-        }
-
-        var yw = getRandom(110, 122); 
-        var sx = getRandom(122, 140); 
-        var wy = getRandom(105, 135); 
-
-        var wl_raw = getRandom(70, 85); 
-        var wl_assign = getRandom(Math.max(wl_raw, 91), 100); 
-
-        var hx_raw = getRandom(70, 88); 
-        var hx_assign = getRandom(Math.max(hx_raw, 91), 99); 
-
-        var sw_raw = getRandom(80, 98); 
-        var sw_assign = getRandom(Math.max(sw_raw, 92), 100); 
-        
-        var raw_total = yw + sx + wy + wl_raw + hx_raw + sw_raw;
-        var assign_total = yw + sx + wy + wl_assign + hx_assign + sw_assign;
-
-        var cls_rank = getRandom(4, 8); 
-        var grade_rank = getRandom(40, 150); 
-
-        var data = {
-            id: id, 
-            cls: real_cls, 
-            cls_rank: cls_rank, grade_rank: grade_rank,
-            raw_total: raw_total, assign_total: assign_total,
-            yw: yw, yw_rank: getRandom(1, 150),
-            sx: sx, sx_rank: getRandom(1, 50),
-            wy: wy, wy_rank: getRandom(1, 100),
-            wl_raw: wl_raw, wl_assign: wl_assign, wl_rank: getRandom(1, 80),
-            hx_raw: hx_raw, hx_assign: hx_assign, hx_rank: getRandom(1, 90),
-            sw_raw: sw_raw, sw_assign: sw_assign, sw_rank: getRandom(1, 70)
-        };
-        localStorage.setItem(key, JSON.stringify(data));
-        return data;
-    }
-
-    function buildTableHtml(data) {
-        var html = '';
-        function row(label, val) {
-            return '<tr><td class="left_cell"><span>' + label + '</span></td><td class="right_cell">' + val + '</td></tr>';
-        }
-        html += row("班级", data.cls);
-        html += row("序", data.cls_rank);
-        html += row("查询号", data.id);
-        html += row("原总", data.raw_total);
-        html += row("总等", data.assign_total);
-        html += row("序", data.grade_rank);
-        html += row("语文", data.yw);
-        html += row("序", data.yw_rank);
-        html += row("数学", data.sx);
-        html += row("序", data.sx_rank);
-        html += row("外语", data.wy);
-        html += row("序", data.wy_rank);
-        html += row("物理", data.wl_raw);
-        html += row("物等", data.wl_assign);
-        html += row("序", data.wl_rank);
-        html += row("化学", data.hx_raw);
-        html += row("化等", data.hx_assign);
-        html += row("序", data.hx_rank);
-        html += row("生物", data.sw_raw);
-        html += row("生等", data.sw_assign);
-        html += row("序", data.sw_rank);
-        html += row("政治", ""); html += row("政等", ""); html += row("序", "");
-        html += row("历史", ""); html += row("历等", ""); html += row("序", "");
-        html += row("地理", ""); html += row("地等", ""); html += row("序", "");
-        return html;
-    }
-
-    $("#yiDunSubmitBtn").unbind('click').click(function() {
-        var inputVal = $("#s_chaxunhao_input").val();
-        if (!inputVal) {
-            $.alert("请输入查询号");
-            return;
-        }
-
-        var $btn = $(this);
-        $btn.addClass('weui-btn_disabled').text('查询中...');
-        
-        setTimeout(function() {
-            var scoreData = getScores(inputVal);
-            $("#score_table").html(buildTableHtml(scoreData));
-
-            $("#wrapper_login").hide();
-            $("#fixed-footer").hide();
-
-            $("#wrapper").show();
-            $(".more-opt-box").css('display', 'flex'); 
-
-            if(windowWidth > 600) {
-                $("#wrapper").css({width:'600px', margin:'0 auto', background:'#FFFFFF', minHeight: '100%'});
-                $('.more-opt-box').css({width: '600px', left:0, right:0, margin:'0 auto'});
-            } else {
-                $('body,html').css({background:'#FFFFFF'});
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <base href="./">
+  <title>宇宙支付</title>
+  <meta name="description" content="宇宙人民银行官方支付平台">
+  <meta name="theme-color" content="#10b981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2310b981' rx='20' width='100' height='100'/><text y='.9em' font-size='80' x='50%' text-anchor='middle'>💰</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
             }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --fg: #1a1a2e;
+      --muted: #6b7280;
+      --accent: #059669;
+      --accent-light: #10b981;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+    
+    .dark {
+      --bg: #0f172a;
+      --fg: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #34d399;
+      --accent-light: #6ee7b7;
+      --card: #1e293b;
+      --border: #334155;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .animated-bg::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 50% 50%, rgba(52, 211, 153, 0.08) 0%, transparent 60%);
+      animation: bgMove 20s ease-in-out infinite;
+    }
+    
+    @keyframes bgMove {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(2%, 2%) rotate(1deg); }
+      66% { transform: translate(-1%, 1%) rotate(-1deg); }
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      50% { transform: translateY(-100px) rotate(180deg); opacity: 0.6; }
+    }
+    
+    .glass-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+    
+    .dark .glass-card {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    .input-field {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 16px;
+      color: var(--fg);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .input-field:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: white;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--fg);
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .page {
+      display: none;
+      animation: pageIn 0.4s ease forwards;
+    }
+    
+    .page.active { display: block; }
+    
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .stagger-in > * {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: staggerItem 0.5s ease forwards;
+    }
+    
+    .stagger-in > *:nth-child(1) { animation-delay: 0.05s; }
+    .stagger-in > *:nth-child(2) { animation-delay: 0.1s; }
+    .stagger-in > *:nth-child(3) { animation-delay: 0.15s; }
+    .stagger-in > *:nth-child(4) { animation-delay: 0.2s; }
+    .stagger-in > *:nth-child(5) { animation-delay: 0.25s; }
+    .stagger-in > *:nth-child(6) { animation-delay: 0.3s; }
+    .stagger-in > *:nth-child(7) { animation-delay: 0.35s; }
+    .stagger-in > *:nth-child(8) { animation-delay: 0.4s; }
+    
+    @keyframes staggerItem {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .balance-display {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 8vw, 48px);
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    
+    .bank-card {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 16px;
+      padding: 24px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1.586;
+      max-width: 360px;
+    }
+    
+    .bank-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+    
+    .tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      padding-bottom: calc(8px + env(safe-area-inset-bottom));
+      z-index: 100;
+    }
+    
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--muted);
+    }
+    
+    .tab-item.active {
+      color: var(--accent);
+    }
+    
+    .tab-item svg {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+      transition: transform 0.3s ease;
+    }
+    
+    .tab-item.active svg {
+      transform: scale(1.1);
+    }
+    
+    .tab-item span {
+      font-size: 11px;
+      font-weight: 500;
+    }
+    
+    .transaction-item {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s ease;
+    }
+    
+    .transaction-item:hover {
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .transaction-item:last-child {
+      border-bottom: none;
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .modal-content {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      animation: modalIn 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .qr-container {
+      background: white;
+      padding: 16px;
+      border-radius: 16px;
+      display: inline-block;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--danger);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .password-dots {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    
+    .password-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    
+    .password-dot.filled {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    
+    .num-keyboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .num-key {
+      background: var(--bg);
+      border: none;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      color: var(--fg);
+    }
+    
+    .num-key:active {
+      transform: scale(0.95);
+      background: var(--accent);
+      color: white;
+    }
+    
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 14px 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      z-index: 300;
+      transition: transform 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .toast.success { border-left: 4px solid var(--success); }
+    .toast.error { border-left: 4px solid var(--danger); }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    .copy-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .copy-btn:hover {
+      background: var(--accent-light);
+    }
+    
+    .message-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s ease;
+    }
+    
+    .message-item:hover {
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .message-item.unread {
+      background: rgba(16, 185, 129, 0.08);
+    }
+    
+    .theme-toggle {
+      width: 50px;
+      height: 28px;
+      background: var(--border);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .theme-toggle.active {
+      background: var(--accent);
+    }
+    
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .theme-toggle.active::after {
+      transform: translateX(22px);
+    }
+    
+    .quick-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .quick-action:hover {
+      transform: scale(1.05);
+    }
+    
+    .quick-action:active {
+      transform: scale(0.95);
+    }
+    
+    .quick-action-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    
+    .page-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 50;
+    }
+    
+    .page-content {
+      padding-bottom: 80px;
+    }
+    
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--bg);
+      border: none;
+      color: var(--fg);
+    }
+    
+    .filter-btn.active {
+      background: var(--accent);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg" id="animatedBg"></div>
+  
+  <div class="toast" id="toast"></div>
+  
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 
-            $(window).scrollTop(0);
-            $btn.removeClass('weui-btn_disabled').text('查询');
-        }, 800);
+  <!-- ========== PAGE: LOGIN ========== -->
+  <div class="page active" id="pageLogin">
+    <div class="min-h-screen flex items-center justify-center p-6">
+      <div class="glass-card p-8 w-full max-w-md stagger-in">
+        <div class="text-center mb-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h1 class="font-display text-2xl font-bold">宇宙支付</h1>
+          <p class="text-sm mt-1" style="color: var(--muted);">宇宙人民银行官方支付平台</p>
+        </div>
+        
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">银行卡号</label>
+            <input type="text" id="loginCardNumber" class="input-field" placeholder="请输入卡号" autocomplete="off">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">登录密码</label>
+            <input type="password" id="loginPassword" class="input-field" placeholder="请输入密码">
+          </div>
+          <button type="submit" class="btn-primary w-full mt-6">登录</button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <p style="color: var(--muted);">还没有账号？</p>
+          <button id="goToRegister" class="font-semibold mt-1" style="color: var(--accent);">立即开户</button>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <button id="demoLogin" class="text-sm" style="color: var(--muted);">演示账号登录</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: REGISTER ========== -->
+  <div class="page" id="pageRegister">
+    <div class="min-h-screen flex items-center justify-center p-6">
+      <div class="glass-card p-8 w-full max-w-md stagger-in">
+        <div class="text-center mb-8">
+          <h2 class="font-display text-2xl font-bold">开立账户</h2>
+          <p class="text-sm mt-1" style="color: var(--muted);">成为宇宙人民银行客户</p>
+        </div>
+        
+        <form id="registerForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">真实姓名</label>
+            <input type="text" id="regName" class="input-field" placeholder="请输入真实姓名" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">身份证号</label>
+            <input type="text" id="regIdCard" class="input-field" placeholder="请输入身份证号" maxlength="18" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">手机号码</label>
+            <input type="tel" id="regPhone" class="input-field" placeholder="请输入手机号" maxlength="11" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">登录密码</label>
+            <input type="password" id="regPassword" class="input-field" placeholder="设置登录密码（至少6位）" minlength="6" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">确认登录密码</label>
+            <input type="password" id="regPasswordConfirm" class="input-field" placeholder="再次输入登录密码" required>
+          </div>
+          <button type="submit" class="btn-primary w-full mt-6">下一步</button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <button id="backToLogin" class="font-medium" style="color: var(--muted);">返回登录</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: SET PAY PASSWORD ========== -->
+  <div class="page" id="pageSetPayPwd">
+    <div class="min-h-screen flex items-center justify-center p-6">
+      <div class="glass-card p-8 w-full max-w-md text-center">
+        <h2 class="font-display text-2xl font-bold mb-2">设置支付密码</h2>
+        <p class="text-sm mb-8" style="color: var(--muted);" id="setPayPwdHint">请输入6位数字支付密码</p>
+        
+        <div class="password-dots mb-8" id="setPayPwdDots">
+          <div class="password-dot"></div>
+          <div class="password-dot"></div>
+          <div class="password-dot"></div>
+          <div class="password-dot"></div>
+          <div class="password-dot"></div>
+          <div class="password-dot"></div>
+        </div>
+        
+        <div class="num-keyboard" id="setPayPwdKeyboard">
+          <button class="num-key" data-num="1">1</button>
+          <button class="num-key" data-num="2">2</button>
+          <button class="num-key" data-num="3">3</button>
+          <button class="num-key" data-num="4">4</button>
+          <button class="num-key" data-num="5">5</button>
+          <button class="num-key" data-num="6">6</button>
+          <button class="num-key" data-num="7">7</button>
+          <button class="num-key" data-num="8">8</button>
+          <button class="num-key" data-num="9">9</button>
+          <button class="num-key" data-action="clear">清空</button>
+          <button class="num-key" data-num="0">0</button>
+          <button class="num-key" data-action="delete">
+            <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"/>
+            </svg>
+          </button>
+        </div>
+        
+        <button class="mt-6 text-sm" style="color: var(--muted);" id="cancelSetPayPwd">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: MAIN WALLET ========== -->
+  <div class="page" id="pageMain">
+    <div class="page-content">
+      <div class="page-header">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold" id="avatarLetter">U</div>
+          <div>
+            <div class="font-semibold" id="mainUserName">用户</div>
+            <div class="text-xs" style="color: var(--muted);" id="mainCardLast">**** **** **** ****</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="themeToggleBtn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <svg class="w-5 h-5" id="themeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+          <button id="notificationBtn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="px-5 mb-6">
+        <div class="glass-card p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm" style="color: var(--muted);">总资产(元)</p>
+              <div class="balance-display" id="mainBalance">0.00</div>
+            </div>
+            <button id="toggleBalance" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-5 gap-2 mt-6">
+            <div class="quick-action" data-action="scan">
+              <div class="quick-action-icon bg-gradient-to-br from-brand-400 to-brand-600">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                </svg>
+              </div>
+              <span class="text-xs">扫一扫</span>
+            </div>
+            <div class="quick-action" data-action="receive">
+              <div class="quick-action-icon bg-gradient-to-br from-amber-400 to-orange-500">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+              </div>
+              <span class="text-xs">收款</span>
+            </div>
+            <div class="quick-action" data-action="transfer">
+              <div class="quick-action-icon bg-gradient-to-br from-blue-400 to-indigo-500">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                </svg>
+              </div>
+              <span class="text-xs">转账</span>
+            </div>
+            <div class="quick-action" data-action="redpacket">
+              <div class="quick-action-icon bg-gradient-to-br from-red-400 to-rose-500">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                </svg>
+              </div>
+              <span class="text-xs">红包</span>
+            </div>
+            <div class="quick-action" data-action="cards">
+              <div class="quick-action-icon bg-gradient-to-br from-purple-400 to-violet-500">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                </svg>
+              </div>
+              <span class="text-xs">银行卡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="px-5 mb-6">
+        <h3 class="font-semibold mb-3">我的银行卡</h3>
+        <div class="bank-card cursor-pointer hover:scale-[1.02] transition-transform" id="bankCardPreview">
+          <div class="flex justify-between items-start mb-6">
+            <div class="text-sm opacity-80">宇宙人民银行</div>
+            <svg class="w-10 h-10 opacity-80" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="9" cy="12" r="5" fill-opacity="0.8"/>
+              <circle cx="15" cy="12" r="5" fill-opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="text-xl tracking-widest mb-6" id="bankCardNumber">**** **** **** ****</div>
+          <div class="flex justify-between text-sm">
+            <div>
+              <div class="opacity-60 text-xs mb-1">持卡人</div>
+              <div id="bankCardHolder">***</div>
+            </div>
+            <div class="text-right">
+              <div class="opacity-60 text-xs mb-1">有效期限</div>
+              <div>12/99</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="px-5">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-semibold">最近交易</h3>
+          <button id="viewAllTransactions" class="text-sm" style="color: var(--accent);">查看全部</button>
+        </div>
+        <div class="glass-card overflow-hidden" id="recentTransactions">
+          <div class="p-8 text-center" style="color: var(--muted);">
+            <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+            <p>暂无交易记录</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: TRANSFER ========== -->
+  <div class="page" id="pageTransfer">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">转账</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div class="glass-card p-6 mb-4">
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">对方卡号</label>
+            <input type="text" id="transferTargetCard" class="input-field text-center tracking-widest" placeholder="输入对方银行卡号" maxlength="23" autocomplete="off">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-2">转账金额</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold" style="color: var(--accent);">¥</span>
+              <input type="number" id="transferAmount" class="input-field text-3xl font-bold pl-10" placeholder="0.00" min="0.01" step="0.01">
+            </div>
+          </div>
+          <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">备注（选填）</label>
+            <input type="text" id="transferRemark" class="input-field" placeholder="添加转账备注" maxlength="50">
+          </div>
+          <button id="transferNextBtn" class="btn-primary w-full">下一步</button>
+        </div>
+        
+        <p class="text-xs text-center" style="color: var(--muted);">转账到宇宙人民银行账户即时到账</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: TRANSFER CONFIRM ========== -->
+  <div class="page" id="pageTransferConfirm">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="transfer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">确认转账</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div class="glass-card p-6 text-center mb-4">
+          <div class="text-4xl font-bold font-display mb-2" style="color: var(--accent);">¥<span id="confirmAmount">0.00</span></div>
+          <p class="text-sm" style="color: var(--muted);">转账金额</p>
+        </div>
+        
+        <div class="glass-card p-4 space-y-3 mb-6">
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">收款卡号</span>
+            <span id="confirmTargetCard" class="font-medium">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">转账备注</span>
+            <span id="confirmRemark">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">付款账户</span>
+            <span id="confirmMyCard" class="font-medium">-</span>
+          </div>
+        </div>
+        
+        <button id="confirmTransferBtn" class="btn-primary w-full">确认转账</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: TRANSFER RESULT ========== -->
+  <div class="page" id="pageTransferResult">
+    <div class="page-content">
+      <div class="min-h-[70vh] flex flex-col items-center justify-center px-5">
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h2 class="font-display text-2xl font-bold mb-2">转账凭证已生成</h2>
+          <p class="text-sm mb-6" style="color: var(--muted);">请将下方凭证发送给对方完成收款</p>
+          
+          <div class="glass-card p-4 mb-4">
+            <div class="text-xs mb-2" style="color: var(--muted);">转账凭证</div>
+            <div class="p-3 rounded-lg text-left break-all text-sm font-mono" style="background: var(--bg);" id="transferVoucher">-</div>
+          </div>
+          
+          <button id="copyVoucherBtn" class="copy-btn mb-4">复制凭证</button>
+          
+          <div class="glass-card p-4 text-left text-sm space-y-2">
+            <div class="flex justify-between">
+              <span style="color: var(--muted);">转账金额</span>
+              <span class="font-semibold" style="color: var(--accent);">¥<span id="resultAmount">0.00</span></span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--muted);">收款卡号</span>
+              <span id="resultTargetCard">-</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--muted);">交易时间</span>
+              <span id="resultTime">-</span>
+            </div>
+          </div>
+        </div>
+        
+        <button id="transferResultBack" class="btn-secondary w-full mt-6">返回首页</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: RECEIVE ========== -->
+  <div class="page" id="pageReceive">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">收款</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div class="flex gap-2 mb-6">
+          <button class="flex-1 py-3 rounded-xl font-medium transition-colors receive-tab active" data-tab="code" style="background: var(--accent); color: white;">收款码</button>
+          <button class="flex-1 py-3 rounded-xl font-medium transition-colors receive-tab" data-tab="voucher" style="background: var(--bg);">凭证收款</button>
+        </div>
+        
+        <div id="receiveCodeTab" class="text-center">
+          <div class="glass-card p-6 mb-4">
+            <div class="qr-container inline-block mb-4">
+              <canvas id="receiveQrCode" width="200" height="200"></canvas>
+            </div>
+            <p class="text-sm font-medium" id="receiveCardDisplay">卡号：**** **** **** ****</p>
+          </div>
+          <button id="copyCardBtn" class="copy-btn">复制卡号</button>
+          
+          <div class="mt-6">
+            <button id="generateReceiveLink" class="btn-secondary w-full">生成收款链接</button>
+          </div>
+        </div>
+        
+        <div id="receiveVoucherTab" class="hidden">
+          <div class="glass-card p-6">
+            <label class="block text-sm font-medium mb-2">输入转账凭证</label>
+            <textarea id="voucherInput" class="input-field h-32 resize-none text-sm" placeholder="粘贴对方发送的转账凭证..."></textarea>
+            <button id="redeemVoucherBtn" class="btn-primary w-full mt-4">确认收款</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: TRANSACTIONS ========== -->
+  <div class="page" id="pageTransactions">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">交易记录</h2>
+        <button id="exportTransactions" class="text-sm p-2" style="color: var(--accent);">导出</button>
+      </div>
+      
+      <div class="px-5">
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="income">收入</button>
+          <button class="filter-btn" data-filter="expense">支出</button>
+          <button class="filter-btn" data-filter="redpacket">红包</button>
+        </div>
+        
+        <div class="glass-card overflow-hidden" id="transactionList">
+          <div class="p-8 text-center" style="color: var(--muted);">暂无交易记录</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: STATISTICS ========== -->
+  <div class="page" id="pageStatistics">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">账单统计</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <button id="prevMonth" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <span class="font-semibold" id="currentMonth">2024年1月</span>
+          <button id="nextMonth" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <div class="glass-card p-4">
+            <p class="text-xs mb-1" style="color: var(--muted);">收入</p>
+            <p class="text-xl font-bold font-display" style="color: var(--accent);">+¥<span id="statIncome">0.00</span></p>
+          </div>
+          <div class="glass-card p-4">
+            <p class="text-xs mb-1" style="color: var(--muted);">支出</p>
+            <p class="text-xl font-bold font-display" style="color: var(--danger);">-¥<span id="statExpense">0.00</span></p>
+          </div>
+        </div>
+        
+        <div class="glass-card p-4 mb-4">
+          <h4 class="font-medium mb-4">消费趋势</h4>
+          <div class="flex items-end justify-between h-40 gap-2" id="chartContainer"></div>
+          <div class="flex justify-between text-xs mt-2" style="color: var(--muted);">
+            <span>1周</span>
+            <span>2周</span>
+            <span>3周</span>
+            <span>4周</span>
+          </div>
+        </div>
+        
+        <div class="glass-card p-4">
+          <h4 class="font-medium mb-4">支出分类</h4>
+          <div class="space-y-3" id="categoryBreakdown">
+            <div class="p-4 text-center" style="color: var(--muted);">暂无数据</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: RED PACKET ========== -->
+  <div class="page" id="pageRedPacket">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">红包</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div class="flex gap-2 mb-6">
+          <button class="flex-1 py-3 rounded-xl font-medium transition-colors redpacket-tab active" data-tab="send" style="background: #ef4444; color: white;">发红包</button>
+          <button class="flex-1 py-3 rounded-xl font-medium transition-colors redpacket-tab" data-tab="receive" style="background: var(--bg);">拆红包</button>
+        </div>
+        
+        <div id="sendRedPacketTab">
+          <div class="glass-card p-6 mb-4">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-red-400 to-rose-500 flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                </svg>
+              </div>
+              <p class="text-sm" style="color: var(--muted);">发红包给好友</p>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-2">红包金额</label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold" style="color: var(--accent);">¥</span>
+                <input type="number" id="redPacketAmount" class="input-field text-2xl font-bold pl-10" placeholder="0.00" min="0.01" step="0.01">
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-2">红包个数</label>
+              <input type="number" id="redPacketCount" class="input-field" placeholder="输入红包个数" min="1" max="100" value="1">
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-sm font-medium mb-2">祝福语</label>
+              <input type="text" id="redPacketMessage" class="input-field" placeholder="恭喜发财，大吉大利" maxlength="20" value="恭喜发财，大吉大利">
+            </div>
+            
+            <button id="sendRedPacketBtn" class="btn-primary w-full" style="background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);">发红包</button>
+          </div>
+        </div>
+        
+        <div id="receiveRedPacketTab" class="hidden">
+          <div class="glass-card p-6">
+            <label class="block text-sm font-medium mb-2">输入红包码</label>
+            <textarea id="redPacketCodeInput" class="input-field h-24 resize-none text-sm" placeholder="粘贴红包码..."></textarea>
+            <button id="openRedPacketBtn" class="btn-primary w-full mt-4" style="background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);">拆红包</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: RED PACKET RESULT ========== -->
+  <div class="page" id="pageRedPacketResult">
+    <div class="page-content">
+      <div class="min-h-[80vh] flex flex-col items-center justify-center px-5">
+        <div class="text-center">
+          <div class="w-32 h-40 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 flex flex-col items-center justify-center shadow-xl" id="redPacketEnvelope">
+            <div class="text-yellow-300 text-3xl font-bold mb-2">¥</div>
+            <div class="text-white text-sm" id="redPacketResultMessage">恭喜发财</div>
+          </div>
+          
+          <h2 class="font-display text-3xl font-bold mb-2" style="color: var(--danger);">+¥<span id="redPacketResultAmount">0.00</span></h2>
+          <p class="text-sm mb-4" style="color: var(--muted);">已存入账户余额</p>
+        </div>
+        
+        <button id="redPacketResultBack" class="btn-secondary w-full mt-6">返回</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: CARDS ========== -->
+  <div class="page" id="pageCards">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">银行卡管理</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5">
+        <div id="cardsList" class="space-y-4"></div>
+        
+        <button id="addNewCard" class="glass-card w-full p-4 mt-4 flex items-center justify-center gap-2 border-2 border-dashed" style="border-color: var(--border);">
+          <svg class="w-5 h-5" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span style="color: var(--accent);">添加银行卡</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: SETTINGS ========== -->
+  <div class="page" id="pageSettings">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">设置</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="px-5 space-y-4">
+        <div class="glass-card p-4">
+          <h4 class="font-medium mb-4">账户信息</h4>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span style="color: var(--muted);">姓名</span>
+              <span id="settingsName">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span style="color: var(--muted);">手机号</span>
+              <span id="settingsPhone">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span style="color: var(--muted);">身份证</span>
+              <span id="settingsIdCard">-</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="glass-card overflow-hidden">
+          <button class="w-full p-4 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" id="changePayPwdBtn">
+            <span>修改支付密码</span>
+            <svg class="w-5 h-5" style="color: var(--muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <div class="h-px" style="background: var(--border);"></div>
+          <button class="w-full p-4 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" id="changeLoginPwdBtn">
+            <span>修改登录密码</span>
+            <svg class="w-5 h-5" style="color: var(--muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="glass-card p-4">
+          <div class="flex justify-between items-center">
+            <span>深色模式</span>
+            <div class="theme-toggle" id="themeToggle"></div>
+          </div>
+        </div>
+        
+        <button id="logoutBtn" class="w-full p-4 rounded-xl text-center font-semibold" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+          退出登录
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: NOTIFICATIONS ========== -->
+  <div class="page" id="pageNotifications">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">消息中心</h2>
+        <button id="clearNotifications" class="text-sm p-2" style="color: var(--accent);">清空</button>
+      </div>
+      
+      <div class="px-5">
+        <div id="notificationList" class="glass-card overflow-hidden">
+          <div class="p-8 text-center" style="color: var(--muted);">暂无消息</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: SCAN ========== -->
+  <div class="page" id="pageScan">
+    <div class="page-content">
+      <div class="page-header">
+        <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" data-back="main">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <h2 class="font-semibold">扫一扫</h2>
+        <div class="w-10"></div>
+      </div>
+      
+      <div class="flex flex-col items-center justify-center px-5 pt-12">
+        <div class="w-64 h-64 rounded-2xl border-4 border-white/20 flex items-center justify-center mb-6" style="background: var(--card);">
+          <svg class="w-24 h-24" style="color: var(--muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 4h4v4H4zM16 4h4v4h-4zM4 16h4v4H4zM12 4v4m0 12v-4m8-4h-4M4 12h4m8 0h4m-4 4h4v4h-4v-4zm-8 0H4"/>
+          </svg>
+        </div>
+        <p class="text-sm text-center" style="color: var(--muted);">扫描二维码或条形码</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: PAYMENT (for external API) ========== -->
+  <div class="page" id="pagePayment">
+    <div class="page-content">
+      <div class="min-h-screen flex flex-col">
+        <div class="page-header">
+          <button class="back-btn p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" id="paymentCancel">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+          <h2 class="font-semibold">收银台</h2>
+          <div class="w-10"></div>
+        </div>
+        
+        <div class="flex-1 px-5">
+          <div class="glass-card p-6 text-center mb-6">
+            <p class="text-sm mb-2" style="color: var(--muted);">支付金额</p>
+            <div class="text-4xl font-bold font-display" style="color: var(--accent);">¥<span id="paymentAmount">0.00</span></div>
+          </div>
+          
+          <div class="glass-card p-4 mb-4">
+            <div class="flex justify-between mb-2">
+              <span style="color: var(--muted);">商户名称</span>
+              <span id="paymentMerchant">-</span>
+            </div>
+            <div class="flex justify-between">
+              <span style="color: var(--muted);">商品说明</span>
+              <span id="paymentDesc">-</span>
+            </div>
+          </div>
+          
+          <div class="glass-card p-4">
+            <div class="flex justify-between items-center">
+              <span>支付方式</span>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                  </svg>
+                </div>
+                <span class="text-sm" id="paymentCardDisplay">宇宙银行卡</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-5">
+          <button id="confirmPaymentBtn" class="btn-primary w-full">确认支付</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: PAYMENT PASSWORD ========== -->
+  <div class="page" id="pagePayPassword">
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+      <div class="text-center mb-8">
+        <h2 class="font-display text-xl font-bold mb-2">请输入支付密码</h2>
+        <p class="text-sm" style="color: var(--muted);" id="payPasswordHint">支付金额：¥0.00</p>
+      </div>
+      
+      <div class="password-dots mb-8" id="payPasswordDots">
+        <div class="password-dot"></div>
+        <div class="password-dot"></div>
+        <div class="password-dot"></div>
+        <div class="password-dot"></div>
+        <div class="password-dot"></div>
+        <div class="password-dot"></div>
+      </div>
+      
+      <div class="num-keyboard" id="payPasswordKeyboard">
+        <button class="num-key" data-num="1">1</button>
+        <button class="num-key" data-num="2">2</button>
+        <button class="num-key" data-num="3">3</button>
+        <button class="num-key" data-num="4">4</button>
+        <button class="num-key" data-num="5">5</button>
+        <button class="num-key" data-num="6">6</button>
+        <button class="num-key" data-num="7">7</button>
+        <button class="num-key" data-num="8">8</button>
+        <button class="num-key" data-num="9">9</button>
+        <button class="num-key" data-action="clear">清空</button>
+        <button class="num-key" data-num="0">0</button>
+        <button class="num-key" data-action="delete">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <button class="mt-6 text-sm" style="color: var(--muted);" id="cancelPayPassword">取消</button>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: PAYMENT SUCCESS ========== -->
+  <div class="page" id="pagePaymentSuccess">
+    <div class="min-h-screen flex flex-col items-center justify-center px-5">
+      <div class="text-center">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h2 class="font-display text-2xl font-bold mb-2">支付成功</h2>
+        <p class="text-3xl font-bold font-display mb-6" style="color: var(--accent);">¥<span id="successAmount">0.00</span></p>
+        
+        <div class="glass-card p-4 text-left text-sm space-y-2 mb-6">
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">商户名称</span>
+            <span id="successMerchant">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">交易时间</span>
+            <span id="successTime">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--muted);">订单号</span>
+            <span id="successOrderId">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <button id="paymentSuccessBack" class="btn-primary w-full">完成</button>
+    </div>
+  </div>
+
+  <!-- ========== TAB BAR ========== -->
+  <div class="tab-bar" id="tabBar" style="display: none;">
+    <div class="tab-item active" data-tab="main">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+      <span>首页</span>
+    </div>
+    <div class="tab-item" data-tab="transactions">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+      </svg>
+      <span>账单</span>
+    </div>
+    <div class="tab-item" data-tab="statistics">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+      </svg>
+      <span>统计</span>
+    </div>
+    <div class="tab-item" data-tab="settings">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+      <span>我的</span>
+    </div>
+  </div>
+
+  <script>
+    // ==================== UTILITIES ====================
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+    
+    // ==================== ENCRYPTION ====================
+    const Crypto = {
+      encode: function(data, key) {
+        try {
+          const jsonStr = JSON.stringify(data);
+          const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+          const shifted = encoded.split('').map((c, i) => 
+            String.fromCharCode(c.charCodeAt(0) + (key.charCodeAt(i % key.length) % 10))
+          ).join('');
+          return btoa(shifted);
+        } catch (e) {
+          console.error('Encode error:', e);
+          return null;
+        }
+      },
+      
+      decode: function(encoded, key) {
+        try {
+          const decoded = atob(encoded);
+          const unshifted = decoded.split('').map((c, i) => 
+            String.fromCharCode(c.charCodeAt(0) - (key.charCodeAt(i % key.length) % 10))
+          ).join('');
+          const jsonStr = decodeURIComponent(escape(atob(unshifted)));
+          return JSON.parse(jsonStr);
+        } catch (e) {
+          console.error('Decode error:', e);
+          return null;
+        }
+      }
+    };
+    
+    // ==================== STORAGE ====================
+    const Storage = {
+      prefix: 'cosmicpay_',
+      get: function(key) {
+        try {
+          const data = localStorage.getItem(this.prefix + key);
+          return data ? JSON.parse(data) : null;
+        } catch (e) {
+          return null;
+        }
+      },
+      set: function(key, value) {
+        try {
+          localStorage.setItem(this.prefix + key, JSON.stringify(value));
+        } catch (e) {
+          console.error('Storage set error:', e);
+        }
+      },
+      remove: function(key) {
+        localStorage.removeItem(this.prefix + key);
+      }
+    };
+    
+    // ==================== TOAST ====================
+    function showToast(message, type) {
+      type = type || 'success';
+      const toast = $('#toast');
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // ==================== MODAL ====================
+    function showModal(content) {
+      $('#modalContent').innerHTML = content;
+      $('#modalOverlay').classList.add('active');
+    }
+    
+    function hideModal() {
+      $('#modalOverlay').classList.remove('active');
+    }
+    
+    $('#modalOverlay').addEventListener('click', function(e) {
+      if (e.target === e.currentTarget) hideModal();
     });
-});
-</script>
-
+    
+    // ==================== NAVIGATION ====================
+    let currentPage = 'login';
+    let pageHistory = ['login'];
+    
+    function showPage(pageName, addToHistory) {
+      addToHistory = addToHistory !== false;
+      $$('.page').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      
+      const pageId = 'page' + pageName.charAt(0).toUpperCase() + pageName.slice(1);
+      const page = $('#' + pageId);
+      
+      if (page) {
+        page.classList.add('active');
+        if (addToHistory && pageHistory[pageHistory.length - 1] !== pageName) {
+          pageHistory.push(pageName);
+        }
+        currentPage = pageName;
+        
+        const pagesWithTabBar = ['main', 'transactions', 'statistics', 'settings'];
+        $('#tabBar').style.display = pagesWithTabBar.indexOf(pageName) !== -1 ? 'flex' : 'none';
+        
+        // Initialize specific pages
+        if (pageName === 'receive') initReceivePage();
+        if (pageName === 'cards') renderCards();
+        if (pageName === 'statistics') updateStatistics();
+      }
+    }
+    
+    function goBack() {
+      if (pageHistory.length > 1) {
+        pageHistory.pop();
+        showPage(pageHistory[pageHistory.length - 1], false);
+      }
+    }
+    
+    document.addEventListener('click', function(e) {
+      const backBtn = e.target.closest('.back-btn');
+      if (backBtn) {
+        const targetPage = backBtn.dataset.back;
+        if (targetPage) {
+          showPage(targetPage);
+        } else {
+          goBack();
+        }
+      }
+    });
+    
+    // ==================== THEME ====================
+    let isDarkMode = Storage.get('darkMode') || false;
+    
+    function updateTheme() {
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const toggle = $('#themeToggle');
+      if (toggle) {
+        toggle.classList.toggle('active', isDarkMode);
+      }
+      Storage.set('darkMode', isDarkMode);
+    }
+    
+    updateTheme();
+    
+    // ==================== USER DATA ====================
+    let currentUser = null;
+    
+    function generateCardNumber() {
+      const prefix = '6222';
+      let num = prefix;
+      for (let i = 0; i < 12; i++) {
+        num += Math.floor(Math.random() * 10);
+      }
+      return num;
+    }
+    
+    function formatCardNumber(num) {
+      const cleaned = String(num).replace(/\s/g, '');
+      return cleaned.replace(/(.{4})/g, '$1 ').trim();
+    }
+    
+    function maskCardNumber(num) {
+      const cleaned = String(num).replace(/\s/g, '');
+      return '**** **** **** ' + cleaned.slice(-4);
+    }
+    
+    function maskPhone(phone) {
+      return String(phone).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+    }
+    
+    function maskIdCard(id) {
+      return String(id).replace(/(.{6}).*(.{4})/, '$1********$2');
+    }
+    
+    // ==================== QR CODE GENERATOR ====================
+    function generateQRCode(text, canvas) {
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, size, size);
+      
+      const cellSize = Math.floor(size / 25);
+      ctx.fillStyle = '#000000';
+      
+      const drawPositionPattern = function(x, y) {
+        ctx.fillRect(x * cellSize, y * cellSize, 7 * cellSize, 7 * cellSize);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect((x + 1) * cellSize, (y + 1) * cellSize, 5 * cellSize, 5 * cellSize);
+        ctx.fillStyle = '#000000';
+        ctx.fillRect((x + 2) * cellSize, (y + 2) * cellSize, 3 * cellSize, 3 * cellSize);
+      };
+      
+      drawPositionPattern(0, 0);
+      drawPositionPattern(18, 0);
+      drawPositionPattern(0, 18);
+      
+      const seed = text.split('').reduce(function(a, c) { return a + c.charCodeAt(0); }, 0);
+      for (let i = 0; i < 25; i++) {
+        for (let j = 0; j < 25; j++) {
+          if ((i < 8 && j < 8) || (i < 8 && j > 16) || (i > 16 && j < 8)) continue;
+          if (i === 6 || j === 6) continue;
+          
+          const rand = Math.sin(seed * (i * 25 + j)) * 10000;
+          if (rand - Math.floor(rand) > 0.5) {
+            ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+      
+      ctx.fillStyle = '#000000';
+      for (let i = 8; i < 18; i++) {
+        if (i % 2 === 0) {
+          ctx.fillRect(i * cellSize, 6 * cellSize, cellSize, cellSize);
+          ctx.fillRect(6 * cellSize, i * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+    
+    // ==================== APP STATE ====================
+    const APP_KEY = 'cosmic_pay_2024';
+    
+    // ==================== REGISTRATION ====================
+    let regTempData = null;
+    let setPayPwdPhase = 'set';
+    let tempPayPwd = '';
+    let firstPayPwd = ''; // Store first password
+    
+    $('#goToRegister').addEventListener('click', function() {
+      showPage('register');
+    });
+    
+    $('#backToLogin').addEventListener('click', function() {
+      showPage('login');
+    });
+    
+    $('#registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = $('#regName').value.trim();
+      const idCard = $('#regIdCard').value.trim();
+      const phone = $('#regPhone').value.trim();
+      const password = $('#regPassword').value;
+      const passwordConfirm = $('#regPasswordConfirm').value;
+      
+      if (!name || !idCard || !phone || !password) {
+        showToast('请填写完整信息', 'error');
+        return;
+      }
+      
+      if (idCard.length !== 18) {
+        showToast('身份证号格式不正确', 'error');
+        return;
+      }
+      
+      if (phone.length !== 11) {
+        showToast('手机号格式不正确', 'error');
+        return;
+      }
+      
+      if (password.length < 6) {
+        showToast('密码至少6位', 'error');
+        return;
+      }
+      
+      if (password !== passwordConfirm) {
+        showToast('两次密码不一致', 'error');
+        return;
+      }
+      
+      regTempData = { name: name, idCard: idCard, phone: phone, password: password };
+      setPayPwdPhase = 'set';
+      tempPayPwd = '';
+      firstPayPwd = '';
+      updatePayPwdDots('setPayPwdDots', '');
+      $('#setPayPwdHint').textContent = '请输入6位数字支付密码';
+      showPage('setPayPwd');
+    });
+    
+    // ==================== PAY PASSWORD SETUP ====================
+    function updatePayPwdDots(containerId, pwd) {
+      const dots = $$('#' + containerId + ' .password-dot');
+      dots.forEach(function(dot, i) {
+        if (i < pwd.length) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
+    }
+    
+    $('#setPayPwdKeyboard').addEventListener('click', function(e) {
+      const key = e.target.closest('.num-key');
+      if (!key) return;
+      
+      const num = key.dataset.num;
+      const action = key.dataset.action;
+      
+      if (action === 'clear') {
+        tempPayPwd = '';
+      } else if (action === 'delete') {
+        tempPayPwd = tempPayPwd.slice(0, -1);
+      } else if (num && tempPayPwd.length < 6) {
+        tempPayPwd += num;
+      }
+      
+      updatePayPwdDots('setPayPwdDots', tempPayPwd);
+      
+      if (tempPayPwd.length === 6) {
+        setTimeout(function() {
+          if (setPayPwdPhase === 'set') {
+            // First password entered, save it and ask for confirmation
+            firstPayPwd = tempPayPwd;
+            setPayPwdPhase = 'confirm';
+            $('#setPayPwdHint').textContent = '请再次输入支付密码';
+            tempPayPwd = '';
+            updatePayPwdDots('setPayPwdDots', '');
+          } else if (setPayPwdPhase === 'confirm') {
+            // Second password entered, compare
+            if (tempPayPwd === firstPayPwd) {
+              regTempData.payPwd = tempPayPwd;
+              completeRegistration();
+            } else {
+              showToast('两次密码不一致，请重试', 'error');
+              setPayPwdPhase = 'set';
+              tempPayPwd = '';
+              firstPayPwd = '';
+              updatePayPwdDots('setPayPwdDots', '');
+              $('#setPayPwdHint').textContent = '请输入6位数字支付密码';
+            }
+          }
+        }, 200);
+      }
+    });
+    
+    $('#cancelSetPayPwd').addEventListener('click', function() {
+      regTempData = null;
+      showPage('register');
+    });
+    
+    function completeRegistration() {
+      const cardNumber = generateCardNumber();
+      const user = {
+        name: regTempData.name,
+        idCard: regTempData.idCard,
+        phone: regTempData.phone,
+        password: regTempData.password,
+        payPassword: regTempData.payPwd,
+        cardNumber: cardNumber,
+        balance: 10000,
+        cards: [{
+          number: cardNumber,
+          bank: '宇宙人民银行',
+          type: '储蓄卡',
+          isDefault: true
+        }],
+        transactions: [],
+        notifications: [{
+          id: Date.now(),
+          type: 'system',
+          title: '开户成功',
+          content: '恭喜您成功开立宇宙人民银行账户，赠送10000元体验金！',
+          time: new Date().toISOString(),
+          read: false
+        }],
+        createdAt: new Date().toISOString()
+      };
+      
+      Storage.set('user_' + user.cardNumber, user);
+      
+      showModal('\n        <div class="text-center">\n          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">\n            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>\n            </svg>\n          </div>\n          <h3 class="font-display text-xl font-bold mb-2">开户成功</h3>\n          <p class="text-sm mb-4" style="color: var(--muted);">您的银行卡号</p>\n          <div class="p-3 rounded-lg mb-4 font-mono text-lg" style="background: var(--bg);">' + formatCardNumber(cardNumber) + '</div>\n          <p class="text-xs mb-4" style="color: var(--danger);">请牢记您的卡号，用于登录</p>\n          <button class="btn-primary w-full" onclick="hideModal(); loginWithCard(\'' + cardNumber + '\')">立即登录</button>\n        </div>\n      ');
+    }
+    
+    window.loginWithCard = function(cardNumber) {
+      $('#loginCardNumber').value = cardNumber;
+      regTempData = null;
+      showPage('login');
+    };
+    
+    // ==================== LOGIN ====================
+    $('#loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const cardNumber = $('#loginCardNumber').value.replace(/\s/g, '');
+      const password = $('#loginPassword').value;
+      
+      const user = Storage.get('user_' + cardNumber);
+      
+      if (!user) {
+        showToast('卡号不存在', 'error');
+        return;
+      }
+      
+      if (user.password !== password) {
+        showToast('密码错误', 'error');
+        return;
+      }
+      
+      currentUser = user;
+      Storage.set('currentUser', cardNumber);
+      showMainPage();
+    });
+    
+    // Demo login
+    $('#demoLogin').addEventListener('click', function() {
+      CosmicPay.createDemoUser();
+    });
+    
+    function checkAutoLogin() {
+      const savedCard = Storage.get('currentUser');
+      if (savedCard) {
+        const user = Storage.get('user_' + savedCard);
+        if (user) {
+          currentUser = user;
+          showMainPage();
+        }
+      }
+    }
+    
+    // ==================== MAIN PAGE ====================
+    function showMainPage() {
+      updateMainPageUI();
+      showPage('main');
+    }
+    
+    function updateMainPageUI() {
+      if (!currentUser) return;
+      
+      $('#avatarLetter').textContent = currentUser.name.charAt(0);
+      $('#mainUserName').textContent = currentUser.name;
+      $('#mainCardLast').textContent = maskCardNumber(currentUser.cardNumber);
+      $('#mainBalance').textContent = currentUser.balance.toFixed(2);
+      
+      $('#bankCardNumber').textContent = formatCardNumber(currentUser.cardNumber);
+      $('#bankCardHolder').textContent = currentUser.name;
+      
+      renderRecentTransactions();
+      
+      const unreadCount = currentUser.notifications.filter(function(n) { return !n.read; }).length;
+      const badge = $('#notificationBadge');
+      if (unreadCount > 0) {
+        badge.style.display = 'flex';
+        badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+    
+    function renderRecentTransactions() {
+      const container = $('#recentTransactions');
+      const transactions = currentUser.transactions.slice(0, 5);
+      
+      if (transactions.length === 0) {
+        container.innerHTML = '\n          <div class="p-8 text-center" style="color: var(--muted);">\n            <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>\n            </svg>\n            <p>暂无交易记录</p>\n          </div>\n        ';
+        return;
+      }
+      
+      let html = '';
+      transactions.forEach(function(t) {
+        const isIncome = t.type === 'income';
+        html += '\n          <div class="transaction-item">\n            <div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3" style="background: ' + (isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)') + '">\n              <svg class="w-5 h-5" style="color: ' + (isIncome ? 'var(--accent)' : 'var(--danger)') + '" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                ' + (isIncome 
+                  ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>'
+                  : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>') + '\n              </svg>\n            </div>\n            <div class="flex-1">\n              <div class="font-medium">' + t.title + '</div>\n              <div class="text-xs" style="color: var(--muted);">' + new Date(t.time).toLocaleString() + '</div>\n            </div>\n            <div class="font-semibold" style="color: ' + (isIncome ? 'var(--accent)' : 'var(--danger)') + '">\n              ' + (isIncome ? '+' : '-') + '¥' + t.amount.toFixed(2) + '\n            </div>\n          </div>\n        ';
+      });
+      container.innerHTML = html;
+    }
+    
+    // ==================== QUICK ACTIONS ====================
+    document.addEventListener('click', function(e) {
+      const action = e.target.closest('.quick-action');
+      if (action) {
+        const actionType = action.dataset.action;
+        switch (actionType) {
+          case 'scan': showPage('scan'); break;
+          case 'receive': showPage('receive'); break;
+          case 'transfer': showPage('transfer'); break;
+          case 'redpacket': showPage('redPacket'); break;
+          case 'cards': showPage('cards'); break;
+        }
+      }
+    });
+    
+    // ==================== TRANSFER ====================
+    let transferData = {};
+    
+    $('#transferNextBtn').addEventListener('click', function() {
+      const targetCard = $('#transferTargetCard').value.replace(/\s/g, '');
+      const amount = parseFloat($('#transferAmount').value);
+      const remark = $('#transferRemark').value.trim() || '转账';
+      
+      if (!targetCard || targetCard.length !== 16) {
+        showToast('请输入正确的卡号', 'error');
+        return;
+      }
+      
+      if (targetCard === currentUser.cardNumber) {
+        showToast('不能给自己转账', 'error');
+        return;
+      }
+      
+      if (!amount || amount <= 0) {
+        showToast('请输入正确的金额', 'error');
+        return;
+      }
+      
+      if (amount > currentUser.balance) {
+        showToast('余额不足', 'error');
+        return;
+      }
+      
+      transferData = { targetCard: targetCard, amount: amount, remark: remark };
+      
+      $('#confirmAmount').textContent = amount.toFixed(2);
+      $('#confirmTargetCard').textContent = formatCardNumber(targetCard);
+      $('#confirmRemark').textContent = remark;
+      $('#confirmMyCard').textContent = formatCardNumber(currentUser.cardNumber);
+      
+      showPage('transferConfirm');
+    });
+    
+    $('#confirmTransferBtn').addEventListener('click', function() {
+      pendingPaymentCallback = function() {
+        const time = new Date();
+        const voucherData = {
+          from: currentUser.cardNumber,
+          to: transferData.targetCard,
+          amount: transferData.amount,
+          remark: transferData.remark,
+          time: time.toISOString()
+        };
+        
+        const voucher = Crypto.encode(voucherData, APP_KEY);
+        
+        const transaction = {
+          id: Date.now(),
+          type: 'expense',
+          title: '转账至' + formatCardNumber(transferData.targetCard),
+          amount: transferData.amount,
+          targetCard: transferData.targetCard,
+          remark: transferData.remark,
+          time: time.toISOString(),
+          status: 'pending',
+          voucher: voucher
+        };
+        
+        currentUser.transactions.unshift(transaction);
+        currentUser.balance -= transferData.amount;
+        saveCurrentUser();
+        
+        $('#transferVoucher').textContent = voucher;
+        $('#resultAmount').textContent = transferData.amount.toFixed(2);
+        $('#resultTargetCard').textContent = formatCardNumber(transferData.targetCard);
+        $('#resultTime').textContent = time.toLocaleString();
+        
+        showPage('transferResult');
+        
+        addNotification('system', '转账凭证已生成', '您已生成一笔' + transferData.amount.toFixed(2) + '元的转账凭证，请发送给对方完成收款。');
+      };
+      
+      paymentPasswordAmount = transferData.amount;
+      $('#payPasswordHint').textContent = '支付金额：¥' + transferData.amount.toFixed(2);
+      paymentPassword = '';
+      updatePayPwdDots('payPasswordDots', '');
+      showPage('payPassword');
+    });
+    
+    $('#copyVoucherBtn').addEventListener('click', function() {
+      const voucher = $('#transferVoucher').textContent;
+      navigator.clipboard.writeText(voucher).then(function() {
+        showToast('凭证已复制');
+      }).catch(function() {
+        showToast('复制失败，请手动复制', 'error');
+      });
+    });
+    
+    $('#transferResultBack').addEventListener('click', function() {
+      showPage('main');
+    });
+    
+    // ==================== RECEIVE ====================
+    $$('.receive-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        $$('.receive-tab').forEach(function(t) {
+          t.style.background = 'var(--bg)';
+          t.style.color = 'var(--fg)';
+        });
+        tab.style.background = 'var(--accent)';
+        tab.style.color = 'white';
+        
+        const tabName = tab.dataset.tab;
+        if (tabName === 'code') {
+          $('#receiveCodeTab').classList.remove('hidden');
+          $('#receiveVoucherTab').classList.add('hidden');
+        } else {
+          $('#receiveCodeTab').classList.add('hidden');
+          $('#receiveVoucherTab').classList.remove('hidden');
+        }
+      });
+    });
+    
+    function initReceivePage() {
+      if (!currentUser) return;
+      $('#receiveCardDisplay').textContent = '卡号：' + formatCardNumber(currentUser.cardNumber);
+      generateQRCode(currentUser.cardNumber, $('#receiveQrCode'));
+    }
+    
+    $('#copyCardBtn').addEventListener('click', function() {
+      navigator.clipboard.writeText(currentUser.cardNumber).then(function() {
+        showToast('卡号已复制');
+      }).catch(function() {
+        showToast('复制失败', 'error');
+      });
+    });
+    
+    $('#generateReceiveLink').addEventListener('click', function() {
+      const link = 'cosmicpay://pay?card=' + currentUser.cardNumber + '&amount=0';
+      showModal('\n        <div>\n          <h4 class="font-semibold mb-4">收款链接</h4>\n          <div class="p-3 rounded-lg mb-4 text-sm break-all" style="background: var(--bg);">' + link + '</div>\n          <button class="btn-primary w-full" onclick="navigator.clipboard.writeText(\'' + link + '\').then(function() { showToast(\'链接已复制\'); }); hideModal();">复制链接</button>\n        </div>\n      ');
+    });
+    
+    $('#redeemVoucherBtn').addEventListener('click', function() {
+      const voucher = $('#voucherInput').value.trim();
+      
+      if (!voucher) {
+        showToast('请输入转账凭证', 'error');
+        return;
+      }
+      
+      const data = Crypto.decode(voucher, APP_KEY);
+      
+      if (!data) {
+        showToast('凭证格式错误', 'error');
+        return;
+      }
+      
+      if (data.to !== currentUser.cardNumber) {
+        showToast('此凭证不是发给您账户的', 'error');
+        return;
+      }
+      
+      const existingTx = currentUser.transactions.find(function(t) { return t.voucher === voucher; });
+      if (existingTx) {
+        showToast('此凭证已使用', 'error');
+        return;
+      }
+      
+      currentUser.balance += data.amount;
+      
+      const transaction = {
+        id: Date.now(),
+        type: 'income',
+        title: '来自' + formatCardNumber(data.from),
+        amount: data.amount,
+        fromCard: data.from,
+        remark: data.remark,
+        time: new Date().toISOString(),
+        status: 'completed'
+      };
+      
+      currentUser.transactions.unshift(transaction);
+      saveCurrentUser();
+      
+      addNotification('transaction', '收款成功', '您收到来自' + formatCardNumber(data.from) + '的转账¥' + data.amount.toFixed(2));
+      
+      showToast('收款成功，+' + data.amount.toFixed(2) + '元');
+      $('#voucherInput').value = '';
+      updateMainPageUI();
+      showPage('main');
+    });
+    
+    // ==================== TRANSACTIONS ====================
+    $('#viewAllTransactions').addEventListener('click', function() {
+      showPage('transactions');
+    });
+    
+    let currentFilter = 'all';
+    
+    $$('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        $$('.filter-btn').forEach(function(b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderTransactions();
+      });
+    });
+    
+    function renderTransactions() {
+      const container = $('#transactionList');
+      let transactions = currentUser.transactions || [];
+      
+      if (currentFilter === 'income') {
+        transactions = transactions.filter(function(t) { return t.type === 'income'; });
+      } else if (currentFilter === 'expense') {
+        transactions = transactions.filter(function(t) { return t.type === 'expense'; });
+      } else if (currentFilter === 'redpacket') {
+        transactions = transactions.filter(function(t) { return t.category === 'redpacket'; });
+      }
+      
+      if (transactions.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center" style="color: var(--muted);">暂无交易记录</div>';
+        return;
+      }
+      
+      let html = '';
+      transactions.forEach(function(t) {
+        const isIncome = t.type === 'income';
+        html += '\n          <div class="transaction-item">\n            <div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3" style="background: ' + (isIncome ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)') + '">\n              <svg class="w-5 h-5" style="color: ' + (isIncome ? 'var(--accent)' : 'var(--danger)') + '" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                ' + (isIncome 
+                  ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>'
+                  : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>') + '\n              </svg>\n            </div>\n            <div class="flex-1">\n              <div class="font-medium">' + t.title + '</div>\n              <div class="text-xs" style="color: var(--muted);">' + new Date(t.time).toLocaleString() + '</div>\n            </div>\n            <div class="font-semibold" style="color: ' + (isIncome ? 'var(--accent)' : 'var(--danger)') + '">\n              ' + (isIncome ? '+' : '-') + '¥' + t.amount.toFixed(2) + '\n            </div>\n          </div>\n        ';
+      });
+      container.innerHTML = html;
+    }
+    
+    $('#exportTransactions').addEventListener('click', function() {
+      const transactions = currentUser.transactions || [];
+      if (transactions.length === 0) {
+        showToast('暂无数据可导出', 'error');
+        return;
+      }
+      
+      let csv = '时间,类型,描述,金额\n';
+      transactions.forEach(function(t) {
+        csv += new Date(t.time).toLocaleString() + ',' + (t.type === 'income' ? '收入' : '支出') + ',' + t.title + ',' + (t.type === 'income' ? '+' : '-') + t.amount.toFixed(2) + '\n';
+      });
+      
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '交易记录_' + new Date().toLocaleDateString() + '.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      showToast('导出成功');
+    });
+    
+    // ==================== STATISTICS ====================
+    let statsDate = new Date();
+    
+    $('#prevMonth').addEventListener('click', function() {
+      statsDate.setMonth(statsDate.getMonth() - 1);
+      updateStatistics();
+    });
+    
+    $('#nextMonth').addEventListener('click', function() {
+      statsDate.setMonth(statsDate.getMonth() + 1);
+      updateStatistics();
+    });
+    
+    function updateStatistics() {
+      const year = statsDate.getFullYear();
+      const month = statsDate.getMonth();
+      
+      $('#currentMonth').textContent = year + '年' + (month + 1) + '月';
+      
+      const transactions = currentUser.transactions.filter(function(t) {
+        const tDate = new Date(t.time);
+        return tDate.getFullYear() === year && tDate.getMonth() === month;
+      });
+      
+      let income = 0;
+      let expense = 0;
+      transactions.forEach(function(t) {
+        if (t.type === 'income') {
+          income += t.amount;
+        } else {
+          expense += t.amount;
+        }
+      });
+      
+      $('#statIncome').textContent = income.toFixed(2);
+      $('#statExpense').textContent = expense.toFixed(2);
+      
+      renderChart(transactions);
+      renderCategories(transactions);
+    }
+    
+    function renderChart(transactions) {
+      const container = $('#chartContainer');
+      const weeks = [0, 0, 0, 0];
+      
+      transactions.forEach(function(t) {
+        if (t.type === 'expense') {
+          const week = Math.floor(new Date(t.time).getDate() / 7);
+          if (week < 4) weeks[week] += t.amount;
+        }
+      });
+      
+      const maxVal = Math.max.apply(null, weeks.concat([1]));
+      
+      let html = '';
+      weeks.forEach(function(val) {
+        html += '\n          <div class="flex-1 flex flex-col items-center gap-2">\n            <div class="w-full rounded-t-lg chart-bar" style="background: linear-gradient(to top, var(--accent), var(--accent-light)); height: ' + (val / maxVal * 100) + '%"></div>\n            <span class="text-xs">¥' + val.toFixed(0) + '</span>\n          </div>\n        ';
+      });
+      container.innerHTML = html;
+    }
+    
+    function renderCategories(transactions) {
+      const container = $('#categoryBreakdown');
+      const expenses = transactions.filter(function(t) { return t.type === 'expense'; });
+      
+      if (expenses.length === 0) {
+        container.innerHTML = '<div class="p-4 text-center" style="color: var(--muted);">暂无数据</div>';
+        return;
+      }
+      
+      const categories = {
+        '转账': { icon: '↗', amount: 0, color: '#3b82f6' },
+        '红包': { icon: '¥', amount: 0, color: '#ef4444' },
+        '支付': { icon: '◉', amount: 0, color: '#10b981' },
+        '其他': { icon: '○', amount: 0, color: '#6b7280' }
+      };
+      
+      expenses.forEach(function(t) {
+        if (t.title.indexOf('转账') !== -1) {
+          categories['转账'].amount += t.amount;
+        } else if (t.category === 'redpacket') {
+          categories['红包'].amount += t.amount;
+        } else {
+          categories['其他'].amount += t.amount;
+        }
+      });
+      
+      let total = 0;
+      Object.keys(categories).forEach(function(key) {
+        total += categories[key].amount;
+      });
+      
+      let html = '';
+      Object.keys(categories).forEach(function(name) {
+        const c = categories[name];
+        if (c.amount > 0) {
+          html += '\n            <div class="flex items-center gap-3">\n              <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style="background: ' + c.color + ';">' + c.icon + '</div>\n              <div class="flex-1">\n                <div class="flex justify-between mb-1">\n                  <span class="font-medium">' + name + '</span>\n                  <span>¥' + c.amount.toFixed(2) + '</span>\n                </div>\n                <div class="h-1 rounded-full overflow-hidden" style="background: var(--border);">\n                  <div class="h-full rounded-full" style="background: ' + c.color + '; width: ' + (c.amount / total * 100) + '%;"></div>\n                </div>\n              </div>\n            </div>\n          ';
+        }
+      });
+      
+      container.innerHTML = html || '<div class="p-4 text-center" style="color: var(--muted);">暂无数据</div>';
+    }
+    
+    // ==================== RED PACKET ====================
+    $$('.redpacket-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        $$('.redpacket-tab').forEach(function(t) {
+          t.style.background = 'var(--bg)';
+          t.style.color = 'var(--fg)';
+        });
+        tab.style.background = '#ef4444';
+        tab.style.color = 'white';
+        
+        const tabName = tab.dataset.tab;
+        if (tabName === 'send') {
+          $('#sendRedPacketTab').classList.remove('hidden');
+          $('#receiveRedPacketTab').classList.add('hidden');
+        } else {
+          $('#sendRedPacketTab').classList.add('hidden');
+          $('#receiveRedPacketTab').classList.remove('hidden');
+        }
+      });
+    });
+    
+    $('#sendRedPacketBtn').addEventListener('click', function() {
+      const amount = parseFloat($('#redPacketAmount').value);
+      const count = parseInt($('#redPacketCount').value) || 1;
+      const message = $('#redPacketMessage').value.trim() || '恭喜发财，大吉大利';
+      
+      if (!amount || amount <= 0) {
+        showToast('请输入红包金额', 'error');
+        return;
+      }
+      
+      if (amount > currentUser.balance) {
+        showToast('余额不足', 'error');
+        return;
+      }
+      
+      if (count < 1 || count > 100) {
+        showToast('红包个数1-100个', 'error');
+        return;
+      }
+      
+      pendingPaymentCallback = function() {
+        const redPacketCode = Crypto.encode({
+          type: 'redpacket',
+          amount: amount,
+          count: count,
+          message: message,
+          from: currentUser.cardNumber,
+          fromName: currentUser.name,
+          time: new Date().toISOString()
+        }, APP_KEY);
+        
+        currentUser.balance -= amount;
+        
+        const transaction = {
+          id: Date.now(),
+          type: 'expense',
+          category: 'redpacket',
+          title: '发红包',
+          amount: amount,
+          time: new Date().toISOString()
+        };
+        currentUser.transactions.unshift(transaction);
+        
+        addNotification('system', '红包已生成', '您发送了一个' + amount.toFixed(2) + '元的红包');
+        saveCurrentUser();
+        
+        showModal('\n          <div class="text-center">\n            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-red-400 to-rose-500 flex items-center justify-center">\n              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>\n              </svg>\n            </div>\n            <h3 class="font-display text-xl font-bold mb-2">红包已生成</h3>\n            <p class="text-sm mb-4" style="color: var(--muted);">将红包码发送给好友</p>\n            <div class="p-3 rounded-lg mb-4 text-xs break-all" style="background: var(--bg);">' + redPacketCode + '</div>\n            <button class="btn-primary w-full mb-2" style="background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);" onclick="navigator.clipboard.writeText(\'' + redPacketCode + '\').then(function() { showToast(\'红包码已复制\'); });">复制红包码</button>\n            <button class="btn-secondary w-full" onclick="hideModal();">关闭</button>\n          </div>\n        ');
+        
+        updateMainPageUI();
+      };
+      
+      paymentPasswordAmount = amount;
+      $('#payPasswordHint').textContent = '红包金额：¥' + amount.toFixed(2);
+      paymentPassword = '';
+      updatePayPwdDots('payPasswordDots', '');
+      showPage('payPassword');
+    });
+    
+    $('#openRedPacketBtn').addEventListener('click', function() {
+      const code = $('#redPacketCodeInput').value.trim();
+      
+      if (!code) {
+        showToast('请输入红包码', 'error');
+        return;
+      }
+      
+      const data = Crypto.decode(code, APP_KEY);
+      
+      if (!data || data.type !== 'redpacket') {
+        showToast('红包码无效', 'error');
+        return;
+      }
+      
+      const claimed = Storage.get('claimed_redpackets') || [];
+      if (claimed.indexOf(code) !== -1) {
+        showToast('红包已被领取', 'error');
+        return;
+      }
+      
+      const claimedAmount = data.count === 1 ? data.amount : (Math.random() * data.amount * 0.5 + data.amount * 0.5 / data.count);
+      const actualAmount = Math.min(claimedAmount, data.amount);
+      
+      currentUser.balance += actualAmount;
+      
+      const transaction = {
+        id: Date.now(),
+        type: 'income',
+        category: 'redpacket',
+        title: '红包来自' + data.fromName,
+        amount: actualAmount,
+        time: new Date().toISOString()
+      };
+      currentUser.transactions.unshift(transaction);
+      
+      claimed.push(code);
+      Storage.set('claimed_redpackets', claimed);
+      
+      addNotification('transaction', '收到红包', '您收到' + data.fromName + '发送的红包¥' + actualAmount.toFixed(2));
+      saveCurrentUser();
+      
+      $('#redPacketResultAmount').textContent = actualAmount.toFixed(2);
+      $('#redPacketResultMessage').textContent = data.message;
+      showPage('redPacketResult');
+      
+      $('#redPacketCodeInput').value = '';
+    });
+    
+    $('#redPacketResultBack').addEventListener('click', function() {
+      updateMainPageUI();
+      showPage('main');
+    });
+    
+    // ==================== CARDS ====================
+    function renderCards() {
+      const container = $('#cardsList');
+      const cards = currentUser.cards || [];
+      
+      let html = '';
+      cards.forEach(function(card) {
+        html += '\n          <div class="bank-card" style="' + (card.isDefault ? '' : 'opacity: 0.8;') + '">\n            <div class="flex justify-between items-start mb-6">\n              <div class="text-sm opacity-80">' + card.bank + '</div>\n              ' + (card.isDefault ? '<span class="text-xs bg-white/20 px-2 py-1 rounded">默认</span>' : '') + '\n            </div>\n            <div class="text-xl tracking-widest mb-6">' + formatCardNumber(card.number) + '</div>\n            <div class="flex justify-between text-sm">\n              <div>\n                <div class="opacity-60 text-xs mb-1">持卡人</div>\n                <div>' + currentUser.name + '</div>\n              </div>\n              <div class="text-right">\n                <div class="opacity-60 text-xs mb-1">类型</div>\n                <div>' + card.type + '</div>\n              </div>\n            </div>\n          </div>\n        ';
+      });
+      container.innerHTML = html;
+    }
+    
+    $('#addNewCard').addEventListener('click', function() {
+      showToast('暂不支持添加其他银行卡');
+    });
+    
+    // ==================== SETTINGS ====================
+    $('#changePayPwdBtn').addEventListener('click', function() {
+      showModal('\n        <div>\n          <h4 class="font-semibold mb-4">修改支付密码</h4>\n          <div class="mb-4">\n            <label class="block text-sm font-medium mb-2">原支付密码</label>\n            <input type="password" id="oldPayPwd" class="input-field" placeholder="请输入原密码" maxlength="6">\n          </div>\n          <div class="mb-4">\n            <label class="block text-sm font-medium mb-2">新支付密码</label>\n            <input type="password" id="newPayPwd" class="input-field" placeholder="请输入新密码" maxlength="6">\n          </div>\n          <div class="mb-4">\n            <label class="block text-sm font-medium mb-2">确认新密码</label>\n            <input type="password" id="confirmNewPayPwd" class="input-field" placeholder="再次输入新密码" maxlength="6">\n          </div>\n          <button class="btn-primary w-full" onclick="changePayPassword()">确认修改</button>\n        </div>\n      ');
+    });
+    
+    window.changePayPassword = function() {
+      const oldPwd = $('#oldPayPwd').value;
+      const newPwd = $('#newPayPwd').value;
+      const confirmPwd = $('#confirmNewPayPwd').value;
+      
+      if (oldPwd !== currentUser.payPassword) {
+        showToast('原密码错误', 'error');
+        return;
+      }
+      
+      if (newPwd.length !== 6 || !/^\d+$/.test(newPwd)) {
+        showToast('新密码必须是6位数字', 'error');
+        return;
+      }
+      
+      if (newPwd !== confirmPwd) {
+        showToast('两次密码不一致', 'error');
+        return;
+      }
+      
+      currentUser.payPassword = newPwd;
+      saveCurrentUser();
+      hideModal();
+      showToast('支付密码修改成功');
+    };
+    
+    $('#changeLoginPwdBtn').addEventListener('click', function() {
+      showToast('功能开发中');
+    });
+    
+    $('#themeToggleBtn').addEventListener('click', function() {
+      isDarkMode = !isDarkMode;
+      updateTheme();
+    });
+    
+    $('#themeToggle').addEventListener('click', function() {
+      isDarkMode = !isDarkMode;
+      updateTheme();
+    });
+    
+    $('#logoutBtn').addEventListener('click', function() {
+      Storage.remove('currentUser');
+      currentUser = null;
+      pageHistory = ['login'];
+      showPage('login');
+      showToast('已退出登录');
+    });
+    
+    // ==================== NOTIFICATIONS ====================
+    $('#notificationBtn').addEventListener('click', function() {
+      renderNotifications();
+      showPage('notifications');
+    });
+    
+    function renderNotifications() {
+      const container = $('#notificationList');
+      const notifications = currentUser.notifications || [];
+      
+      if (notifications.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center" style="color: var(--muted);">暂无消息</div>';
+        return;
+      }
+      
+      let html = '';
+      notifications.forEach(function(n) {
+        const isTransaction = n.type === 'transaction';
+        html += '\n          <div class="message-item ' + (n.read ? '' : 'unread') + '">\n            <div class="flex items-start gap-3">\n              <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: ' + (isTransaction ? 'rgba(16, 185, 129, 0.1)' : 'rgba(59, 130, 246, 0.1)') + '">\n                <svg class="w-5 h-5" style="color: ' + (isTransaction ? 'var(--accent)' : '#3b82f6') + '" fill="none" stroke="currentColor" viewBox="0 0 24 24">\n                  ' + (isTransaction 
+                    ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+                    : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>') + '\n                </svg>\n              </div>\n              <div class="flex-1">\n                <div class="font-medium">' + n.title + '</div>\n                <div class="text-sm" style="color: var(--muted);">' + n.content + '</div>\n                <div class="text-xs mt-1" style="color: var(--muted);">' + new Date(n.time).toLocaleString() + '</div>\n              </div>\n            </div>\n          </div>\n        ';
+      });
+      
+      container.innerHTML = html;
+      
+      currentUser.notifications.forEach(function(n) { n.read = true; });
+      saveCurrentUser();
+      $('#notificationBadge').style.display = 'none';
+    }
+    
+    $('#clearNotifications').addEventListener('click', function() {
+      currentUser.notifications = [];
+      saveCurrentUser();
+      renderNotifications();
+      showToast('消息已清空');
+    });
+    
+    function addNotification(type, title, content) {
+      currentUser.notifications = currentUser.notifications || [];
+      currentUser.notifications.unshift({
+        id: Date.now(),
+        type: type,
+        title: title,
+        content: content,
+        time: new Date().toISOString(),
+        read: false
+      });
+      saveCurrentUser();
+    }
+    
+    // ==================== PAYMENT PASSWORD ====================
+    let paymentPassword = '';
+    let paymentPasswordAmount = 0;
+    let pendingPaymentCallback = null;
+    
+    $('#payPasswordKeyboard').addEventListener('click', function(e) {
+      const key = e.target.closest('.num-key');
+      if (!key) return;
+      
+      const num = key.dataset.num;
+      const action = key.dataset.action;
+      
+      if (action === 'clear') {
+        paymentPassword = '';
+      } else if (action === 'delete') {
+        paymentPassword = paymentPassword.slice(0, -1);
+      } else if (num && paymentPassword.length < 6) {
+        paymentPassword += num;
+      }
+      
+      updatePayPwdDots('payPasswordDots', paymentPassword);
+      
+      if (paymentPassword.length === 6) {
+        setTimeout(function() {
+          if (paymentPassword === currentUser.payPassword) {
+            if (pendingPaymentCallback) {
+              pendingPaymentCallback();
+              pendingPaymentCallback = null;
+            }
+          } else {
+            showToast('支付密码错误', 'error');
+            paymentPassword = '';
+            updatePayPwdDots('payPasswordDots', '');
+          }
+        }, 200);
+      }
+    });
+    
+    $('#cancelPayPassword').addEventListener('click', function() {
+      pendingPaymentCallback = null;
+      showPage('main');
+    });
+    
+    // ==================== TAB BAR ====================
+    $$('.tab-item').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        $$('.tab-item').forEach(function(t) {
+          t.classList.remove('active');
+        });
+        tab.classList.add('active');
+        
+        const tabName = tab.dataset.tab;
+        showPage(tabName);
+        
+        if (tabName === 'transactions') renderTransactions();
+        if (tabName === 'statistics') updateStatistics();
+        if (tabName === 'settings') {
+          $('#settingsName').textContent = currentUser.name;
+          $('#settingsPhone').textContent = maskPhone(currentUser.phone);
+          $('#settingsIdCard').textContent = maskIdCard(currentUser.idCard);
+        }
+        if (tabName === 'main') updateMainPageUI();
+      });
+    });
+    
+    // ==================== EXTERNAL API ====================
+    const CosmicPay = {
+      init: function() {
+        return this;
+      },
+      
+      isReady: function() {
+        return currentUser !== null;
+      },
+      
+      getUser: function() {
+        if (!currentUser) return null;
+        return {
+          name: currentUser.name,
+          cardNumber: currentUser.cardNumber,
+          balance: currentUser.balance
+        };
+      },
+      
+      pay: function(options) {
+        const amount = options.amount;
+        const merchant = options.merchant;
+        const description = options.description;
+        const orderId = options.orderId;
+        const onSuccess = options.onSuccess;
+        const onCancel = options.onCancel;
+        
+        if (!currentUser) {
+          showToast('请先登录', 'error');
+          return false;
+        }
+        
+        if (amount > currentUser.balance) {
+          showToast('余额不足', 'error');
+          return false;
+        }
+        
+        window._cosmicPayOnSuccess = onSuccess;
+        window._cosmicPayOnCancel = onCancel;
+        
+        $('#paymentAmount').textContent = amount.toFixed(2);
+        $('#paymentMerchant').textContent = merchant || '商户';
+        $('#paymentDesc').textContent = description || '商品';
+        window._cosmicPayOrderId = orderId || 'ORD' + Date.now();
+        window._cosmicPayAmount = amount;
+        window._cosmicPayMerchant = merchant;
+        
+        showPage('payment');
+        return true;
+      },
+      
+      createDemoUser: function() {
+        const cardNumber = generateCardNumber();
+        const user = {
+          name: '演示用户',
+          idCard: '110101199001010001',
+          phone: '13800138000',
+          password: '123456',
+          payPassword: '123456',
+          cardNumber: cardNumber,
+          balance: 10000,
+          cards: [{
+            number: cardNumber,
+            bank: '宇宙人民银行',
+            type: '储蓄卡',
+            isDefault: true
+          }],
+          transactions: [],
+          notifications: [{
+            id: Date.now(),
+            type: 'system',
+            title: '欢迎使用',
+            content: '这是一个演示账户，密码均为123456，您可以体验全部功能。',
+            time: new Date().toISOString(),
+            read: false
+          }],
+          createdAt: new Date().toISOString()
+        };
+        
+        Storage.set('user_' + user.cardNumber, user);
+        currentUser = user;
+        Storage.set('currentUser', cardNumber);
+        showMainPage();
+        
+        return {
+          cardNumber: cardNumber,
+          password: '123456',
+          payPassword: '123456'
+        };
+      }
+    };
+    
+    // Payment page handlers
+    $('#paymentCancel').addEventListener('click', function() {
+      if (window._cosmicPayOnCancel) {
+        window._cosmicPayOnCancel();
+      }
+      showPage('main');
+    });
+    
+    $('#confirmPaymentBtn').addEventListener('click', function() {
+      pendingPaymentCallback = function() {
+        const amount = window._cosmicPayAmount;
+        const merchant = window._cosmicPayMerchant;
+        const orderId = window._cosmicPayOrderId;
+        
+        currentUser.balance -= amount;
+        
+        const transaction = {
+          id: Date.now(),
+          type: 'expense',
+          title: merchant || '消费支付',
+          amount: amount,
+          time: new Date().toISOString(),
+          orderId: orderId
+        };
+        
+        currentUser.transactions.unshift(transaction);
+        saveCurrentUser();
+        
+        $('#successAmount').textContent = amount.toFixed(2);
+        $('#successMerchant').textContent = merchant || '商户';
+        $('#successTime').textContent = new Date().toLocaleString();
+        $('#successOrderId').textContent = orderId;
+        
+        showPage('paymentSuccess');
+        
+        if (window._cosmicPayOnSuccess) {
+          window._cosmicPayOnSuccess({
+            orderId: orderId,
+            amount: amount,
+            time: new Date().toISOString()
+          });
+        }
+      };
+      
+      paymentPasswordAmount = window._cosmicPayAmount;
+      $('#payPasswordHint').textContent = '支付金额：¥' + window._cosmicPayAmount.toFixed(2);
+      paymentPassword = '';
+      updatePayPwdDots('payPasswordDots', '');
+      showPage('payPassword');
+    });
+    
+    $('#paymentSuccessBack').addEventListener('click', function() {
+      updateMainPageUI();
+      showPage('main');
+    });
+    
+    // ==================== SAVE USER ====================
+    function saveCurrentUser() {
+      if (currentUser) {
+        Storage.set('user_' + currentUser.cardNumber, currentUser);
+      }
+    }
+    
+    // ==================== PARTICLES ====================
+    function createParticles() {
+      const bg = $('#animatedBg');
+      if (!bg) return;
+      
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 6 + 2;
+        particle.style.cssText = '\n          width: ' + size + 'px;\n          height: ' + size + 'px;\n          background: rgba(16, 185, 129, ' + (Math.random() * 0.3 + 0.1) + ');\n          left: ' + (Math.random() * 100) + '%;\n          top: ' + (Math.random() * 100) + '%;\n          animation-delay: ' + (Math.random() * 15) + 's;\n          animation-duration: ' + (Math.random() * 10 + 15) + 's;\n        ';
+        bg.appendChild(particle);
+      }
+    }
+    
+    // ==================== INIT ====================
+    function init() {
+      createParticles();
+      checkAutoLogin();
+      
+      window.CosmicPay = CosmicPay.init();
+      
+      console.log('%c宇宙支付已加载', 'color: #10b981; font-size: 20px; font-weight: bold;');
+      console.log('%cAPI: window.CosmicPay', 'color: #6b7280;');
+      console.log('%c创建演示用户: CosmicPay.createDemoUser()', 'color: #6b7280;');
+    }
+    
+    init();
+  </script>
 </body>
 </html>

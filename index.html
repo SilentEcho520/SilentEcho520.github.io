@@ -338,13 +338,11 @@
     }
 
     function handleVIPClick() {
-        // 如果已经是VIP
         if (CosmicPay.isVIP()) {
             alert("您已经是尊贵的VIP会员！");
             return;
         }
 
-        // 发起支付请求
         CosmicPay.pay({
             amount: 9.99,
             title: '音乐VIP会员',
@@ -353,13 +351,11 @@
                 updateVIPStatus();
             },
             onFail: function(msg) {
-                // 错误已在SDK弹窗中处理，这里可以做额外逻辑
                 console.log('支付失败:', msg);
             }
         });
     }
 
-    // 权限检查函数
     function checkPermission() {
         if (CosmicPay.isVIP()) {
             return true;
@@ -371,7 +367,6 @@
 
     // --- [修改] 重构探索在线音乐功能，增加权限检查 ---
     async function exploreOnlineMusic() {
-        // 检查权限，无权限则拦截
         if (!checkPermission()) return;
 
         state.isOnlineMode = true;
@@ -404,7 +399,6 @@
     
     // --- [修改] 重构播放在线歌曲功能，增加权限检查 ---
     async function playOnlineSong(index) {
-        // 播放前再次检查权限
         if (!checkPermission()) return;
 
         state.isOnlineMode = true;
@@ -505,12 +499,7 @@
         if (state.audioFiles.length > 0 && dom.audioPlayer.paused) playAudio(0);
     }
 
-    // [修改] 本地播放也增加权限检查（可选）
     function playAudio(index) {
-        // 本地播放是否需要VIP？根据需求决定。这里假设本地播放免费，在线播放收费。
-        // 如果本地也要收费，取消下面这行注释：
-        // if (!checkPermission()) return; 
-
         if (index < 0 || index >= state.audioFiles.length) return;
         if (state.currentAudioUrl) URL.revokeObjectURL(state.currentAudioUrl);
         

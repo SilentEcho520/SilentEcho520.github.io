@@ -2,20 +2,18 @@
 (function(window) {
     'use strict';
 
-    // 必须与宇宙支付主程序使用的存储前缀一致
+    // 存储前缀，必须与宇宙支付主程序一致
     const STORAGE_PREFIX = 'cosmicpay_';
     const USER_KEY_PREFIX = STORAGE_PREFIX + 'user_';
     const CURRENT_USER_KEY = STORAGE_PREFIX + 'currentUser';
-    const VIP_KEY = STORAGE_PREFIX + 'vip_music_status'; // 音乐播放器专用的VIP状态
+    const VIP_KEY = STORAGE_PREFIX + 'vip_music_status';
 
-    // 工具函数：获取当前登录的宇宙支付用户
+    // 获取当前登录用户
     function getLoggedUser() {
         const cardNumber = localStorage.getItem(CURRENT_USER_KEY);
         if (!cardNumber) return null;
-        
         const userDataStr = localStorage.getItem(USER_KEY_PREFIX + cardNumber);
         if (!userDataStr) return null;
-        
         try {
             return JSON.parse(userDataStr);
         } catch (e) {
@@ -23,22 +21,19 @@
         }
     }
 
-    // 工具函数：保存用户数据
+    // 保存用户数据
     function saveUser(user) {
         if (!user || !user.cardNumber) return;
         localStorage.setItem(USER_KEY_PREFIX + user.cardNumber, JSON.stringify(user));
     }
 
-    // 核心SDK对象
     const CosmicPay = {
-        // 1. 检查是否是VIP
+        // 1. 检查VIP状态
         isVIP: function() {
-            // 也可以检查用户的余额或者特定的VIP字段
-            const vipStatus = localStorage.getItem(VIP_KEY);
-            return vipStatus === 'activated';
+            return localStorage.getItem(VIP_KEY) === 'activated';
         },
 
-        // 2. 获取当前钱包信息（用于UI显示）
+        // 2. 获取钱包信息
         getWalletInfo: function() {
             const user = getLoggedUser();
             if (!user) return { logged: false };
@@ -50,43 +45,34 @@
             };
         },
 
-        // 3. 发起支付（直接扣款逻辑）
+        // 3. 发起支付 (直接扣款)
         pay: function(options) {
             const { amount, title, onSuccess, onFail } = options;
-            
             const user = getLoggedUser();
             
-            // 情况A：用户未登录宇宙支付
             if (!user) {
                 if (confirm('您尚未登录宇宙支付钱包，是否现在跳转登录？')) {
-                    // 跳转到宇宙支付主页面
                     window.location.href = 'pay.html'; 
                 }
                 return;
             }
 
-            // 情况B：已登录，弹出支付密码输入框
             this.showPayModal({
                 user: user,
                 amount: amount,
                 title: title,
                 onConfirm: (password) => {
-                    // 验证支付密码
                     if (user.payPassword !== password) {
                         onFail && onFail('支付密码错误');
-                        return false; // 保持弹窗打开
+                        return false;
                     }
-
-                    // 验证余额
                     if (user.balance < amount) {
-                        onFail && onFail('余额不足，请前往宇宙支付充值');
+                        onFail && onFail('余额不足，请前往钱包充值');
                         return false;
                     }
 
-                    // --- 执行扣款 ---
+                    // 执行扣款
                     user.balance -= amount;
-                    
-                    // 添加交易记录
                     if (!user.transactions) user.transactions = [];
                     user.transactions.unshift({
                         id: Date.now(),
@@ -95,16 +81,10 @@
                         amount: amount,
                         time: new Date().toISOString()
                     });
-
-                    // 保存数据回 localStorage
                     saveUser(user);
-
-                    // 开通VIP
                     localStorage.setItem(VIP_KEY, 'activated');
-
-                    // 回调成功
                     onSuccess && onSuccess();
-                    return true; // 关闭弹窗
+                    return true;
                 }
             });
         },
@@ -112,8 +92,6 @@
         // 4. 支付弹窗UI
         showPayModal: function(options) {
             const { user, amount, title, onConfirm } = options;
-            
-            // 移除旧弹窗
             const oldModal = document.getElementById('cosmic-pay-modal');
             if (oldModal) oldModal.remove();
 
@@ -167,24 +145,14 @@
 
             pwdInput.focus();
 
-            // 绑定确认事件
             confirmBtn.onclick = () => {
                 const pwd = pwdInput.value;
-                if (!pwd) {
-                    errorDiv.textContent = '请输入支付密码';
-                    return;
-                }
-                
-                // 调用传入的确认逻辑
+                if (!pwd) { errorDiv.textContent = '请输入支付密码'; return; }
                 const result = onConfirm(pwd);
-                if (result) {
-                    modal.remove();
-                }
+                if (result) modal.remove();
             };
 
-            cancelBtn.onclick = () => {
-                modal.remove();
-            };
+            cancelBtn.onclick = () => modal.remove();
         }
     };
 
